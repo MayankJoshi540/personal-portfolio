@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayank Joshi | Full Stack Developer</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0B1120',
+                            card: '#1E293B',
+                            primary: '#38BDF8', // Sky Blue
+                            secondary: '#818CF8', // Indigo
+                            text: '#F1F5F9',
+                            muted: '#94A3B8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B1120;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        
+        /* Gradient Text Utility */
+        .text-gradient {
+            background: linear-gradient(to right, #38BDF8, #818CF8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-text antialiased selection:bg-brand-primary selection:text-brand-dark overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-brand-dark/90 backdrop-blur-md border-b border-slate-800 transition-all duration-300" data-aos="fade-down" data-aos-duration="1000">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="text-2xl font-bold text-gradient">
+                        &lt;MJ /&gt;
+                    </span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-sm font-medium text-brand-muted hover:text-brand-primary transition-colors">Home</a>
+                    <a href="#about" class="text-sm font-medium text-brand-muted hover:text-brand-primary transition-colors">About</a>
+                    <a href="#projects" class="text-sm font-medium text-brand-muted hover:text-brand-primary transition-colors">Projects</a>
+                    <a href="#contact" class="px-5 py-2.5 text-sm font-semibold text-brand-dark bg-brand-primary rounded-full hover:bg-sky-300 transition-all shadow-lg shadow-sky-500/20 hover:scale-105">
+                        Hire Me
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-brand-text hover:text-brand-primary focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-card border-t border-slate-800 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#home" class="block px-3 py-3 text-base font-medium text-brand-text hover:bg-slate-800 rounded-md">Home</a>
+                <a href="#about" class="block px-3 py-3 text-base font-medium text-brand-text hover:bg-slate-800 rounded-md">About</a>
+                <a href="#projects" class="block px-3 py-3 text-base font-medium text-brand-text hover:bg-slate-800 rounded-md">Projects</a>
+                <a href="#contact" class="block px-3 py-3 text-base font-medium text-brand-primary hover:bg-slate-800 rounded-md">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-primary/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-secondary/10 rounded-full blur-3xl -z-10 animate-pulse" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div data-aos="fade-up" data-aos-delay="100">
+                <div class="inline-block mb-6 px-4 py-1.5 rounded-full border border-slate-700 bg-slate-800/50 backdrop-blur-sm hover:border-brand-primary transition-colors cursor-default">
+                    <span class="text-sm font-medium text-brand-primary">👋 Full Stack Developer</span>
+                </div>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6" data-aos="fade-up" data-aos-delay="200">
+                Building Scalable <br>
+                <span class="text-gradient">Web Applications</span>
+            </h1>
+            
+            <p class="mt-6 max-w-2xl mx-auto text-xl text-brand-muted leading-relaxed" data-aos="fade-up" data-aos-delay="300">
+                Hi, I'm <span class="text-white font-semibold">Mayank Joshi</span>. I specialize in the <span class="text-brand-primary">MERN Stack</span> and modern web technologies. I transform complex requirements into robust, high-performance React applications.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="400">
+                <a href="#projects" class="px-8 py-4 text-base font-bold text-brand-dark bg-brand-primary rounded-xl hover:bg-sky-300 transition-all shadow-lg shadow-sky-500/25 transform hover:-translate-y-1 hover:scale-105">
+                    View Projects
+                </a>
+                <!-- Resume Download Button -->
+                <a href="./resume.pdf" download class="px-8 py-4 text-base font-bold text-brand-text border border-slate-700 bg-slate-800/50 rounded-xl hover:bg-slate-800 transition-all hover:border-brand-primary hover:text-brand-primary flex items-center justify-center gap-2 group">
+                    <i class="fa-solid fa-download group-hover:animate-bounce"></i> Download Resume
+                </a>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden md:block" data-aos="fade-up" data-aos-delay="800" data-aos-offset="0">
+                <a href="#about" class="text-brand-muted hover:text-brand-primary transition-colors animate-bounce block">
+                    <i class="fa-solid fa-arrow-down text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <!-- Text Content -->
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 flex items-center gap-3">
+                        <span class="w-12 h-1 bg-brand-primary rounded-full block"></span>
+                        About Me
+                    </h2>
+                    <div class="space-y-6 text-lg text-brand-muted">
+                        <p>
+                            I am a passionate <strong class="text-white">Full Stack Web Developer</strong> with a deep understanding of the React ecosystem. Currently pursuing my B.C.A. (Hons.) at <strong class="text-white">Maharaja Surajmal Institute</strong>, I have dedicated my time to mastering modern web development.
+                        </p>
+                        <p>
+                            My expertise lies in building end-to-end applications using the <strong class="text-brand-primary">MERN Stack</strong> (MongoDB, Express.js, React.js, Node.js). I love solving complex backend logic while ensuring the frontend is pixel-perfect and responsive.
+                        </p>
+                        <p>
+                            Whether it's optimizing database queries or creating smooth UI animations, I enjoy every aspect of the development lifecycle.
+                        </p>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="mt-10 grid grid-cols-3 gap-6 border-t border-slate-800 pt-8">
+                        <div class="text-center md:text-left">
+                            <h3 class="text-3xl font-bold text-white">MERN</h3>
+                            <p class="text-sm text-brand-muted">Specialist</p>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h3 class="text-3xl font-bold text-white">10+</h3>
+                            <p class="text-sm text-brand-muted">Projects</p>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h3 class="text-3xl font-bold text-white">2025</h3>
+                            <p class="text-sm text-brand-muted">Graduation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Grid -->
+                <div class="bg-brand-card p-8 rounded-2xl border border-slate-800 shadow-2xl" data-aos="fade-left">
+                    <h3 class="text-xl font-bold text-white mb-6 border-b border-slate-700 pb-4">Tech Stack</h3>
+                    <div class="grid grid-cols-4 gap-6">
+                        <!-- React -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center group-hover:bg-cyan-400/20 group-hover:text-cyan-400 transition-all transform group-hover:scale-110">
+                                <i class="fa-brands fa-react text-3xl animate-spin-slow"></i>
+                            </div>
+                            <span class="text-xs font-medium text-brand-muted">React</span>
+                        </div>
+                        <!-- Node -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center group-hover:bg-green-500/20 group-hover:text-green-500 transition-all transform group-hover:scale-110">
+                                <i class="fa-brands fa-node text-3xl"></i>
+                            </div>
+                            <span class="text-xs font-medium text-brand-muted">Node.js</span>
+                        </div>
+                        <!-- Mongo -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center group-hover:bg-green-400/20 group-hover:text-green-400 transition-all transform group-hover:scale-110">
+                                <i class="fa-solid fa-database text-3xl"></i>
+                            </div>
+                            <span class="text-xs font-medium text-brand-muted">MongoDB</span>
+                        </div>
+                        <!-- JS -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center group-hover:bg-yellow-400/20 group-hover:text-yellow-400 transition-all transform group-hover:scale-110">
+                                <i class="fa-brands fa-js text-3xl"></i>
+                            </div>
+                            <span class="text-xs font-medium text-brand-muted">JS</span>
+                        </div>
+                        <!-- Tailwind -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center group-hover:bg-sky-400/20 group-hover:text-sky-400 transition-all transform group-hover:scale-110">
+                                <i class="fa-solid fa-wind text-3xl"></i>
+                            </div>
+                            <span class="text-xs font-medium text-brand-muted">Tailwind</span>
+                        </div>
+                        <!-- Git -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center group-hover:bg-orange-600/20 group-hover:text-orange-600 transition-all transform group-hover:scale-110">
+                                <i class="fa-brands fa-git-alt text-3xl"></i>
+                            </div>
+                            <span class="text-xs font-medium text-brand-muted">Git</span>
+                        </div>
+                        <!-- HTML -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center group-hover:bg-orange-500/20 group-hover:text-orange-500 transition-all transform group-hover:scale-110">
+                                <i class="fa-brands fa-html5 text-3xl"></i>
+                            </div>
+                            <span class="text-xs font-medium text-brand-muted">HTML</span>
+                        </div>
+                        <!-- CSS -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center group-hover:bg-blue-500/20 group-hover:text-blue-500 transition-all transform group-hover:scale-110">
+                                <i class="fa-brands fa-css3-alt text-3xl"></i>
+                            </div>
+                            <span class="text-xs font-medium text-brand-muted">CSS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Featured Projects</h2>
+                <p class="text-brand-muted max-w-2xl mx-auto">Showcasing my journey in Full Stack Development.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project Card 1 -->
+                <div class="group bg-brand-card rounded-2xl border border-slate-800 overflow-hidden hover:border-brand-primary/50 transition-all hover:shadow-2xl hover:shadow-brand-primary/10" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 bg-slate-800 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900"></div>
+                        <i class="fa-solid fa-user-secret text-6xl text-slate-700 group-hover:text-brand-primary transition-colors transform group-hover:scale-110 duration-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-primary transition-colors">Secrets App</h3>
+                        <p class="text-brand-muted text-sm mb-4 line-clamp-3">
+                            A secure full-stack authentication app. Users can register, login, and share secrets anonymously. Implemented using Passport.js for security and MongoDB for data persistence.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 text-xs font-medium bg-slate-800 text-brand-primary rounded-full">Node.js</span>
+                            <span class="px-3 py-1 text-xs font-medium bg-slate-800 text-brand-primary rounded-full">MongoDB</span>
+                            <span class="px-3 py-1 text-xs font-medium bg-slate-800 text-brand-primary rounded-full">Express</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="https://secrets-app-production.up.railway.app/" target="_blank" class="flex-1 py-2.5 text-center text-sm font-semibold bg-brand-primary text-brand-dark rounded-lg hover:bg-sky-300 transition-colors">
+                                <i class="fa-solid fa-rocket mr-2"></i>Live Demo
+                            </a>
+                            <a href="https://github.com/MayankJoshi540/secrets-app" target="_blank" class="flex-1 py-2.5 text-center text-sm font-semibold border border-slate-700 text-white rounded-lg hover:bg-slate-800 transition-colors">
+                                <i class="fa-brands fa-github mr-2"></i>Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="group bg-brand-card rounded-2xl border border-slate-800 overflow-hidden hover:border-brand-primary/50 transition-all hover:shadow-2xl hover:shadow-brand-primary/10" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-48 bg-slate-800 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900"></div>
+                        <i class="fa-brands fa-twitter text-6xl text-slate-700 group-hover:text-brand-primary transition-colors transform group-hover:scale-110 duration-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-primary transition-colors">Twitter Clone</h3>
+                        <p class="text-brand-muted text-sm mb-4 line-clamp-3">
+                            A responsive UI clone of the Twitter/X landing page. Demonstrates advanced CSS layout techniques including Grid and Flexbox for a pixel-perfect design.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 text-xs font-medium bg-slate-800 text-brand-primary rounded-full">HTML5</span>
+                            <span class="px-3 py-1 text-xs font-medium bg-slate-800 text-brand-primary rounded-full">Tailwind</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="https://stellular-souffle-737dbe.netlify.app/" target="_blank" class="flex-1 py-2.5 text-center text-sm font-semibold bg-brand-primary text-brand-dark rounded-lg hover:bg-sky-300 transition-colors">
+                                <i class="fa-solid fa-rocket mr-2"></i>Live Demo
+                            </a>
+                            <a href="https://github.com/MayankJoshi540/Twitter-X-Clone-HomePage" target="_blank" class="flex-1 py-2.5 text-center text-sm font-semibold border border-slate-700 text-white rounded-lg hover:bg-slate-800 transition-colors">
+                                <i class="fa-brands fa-github mr-2"></i>Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="group bg-brand-card rounded-2xl border border-slate-800 overflow-hidden hover:border-brand-primary/50 transition-all hover:shadow-2xl hover:shadow-brand-primary/10" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-48 bg-slate-800 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900"></div>
+                        <i class="fa-solid fa-list-check text-6xl text-slate-700 group-hover:text-brand-primary transition-colors transform group-hover:scale-110 duration-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-primary transition-colors">Full Stack Todo</h3>
+                        <p class="text-brand-muted text-sm mb-4 line-clamp-3">
+                            A complete CRUD application with a Node.js backend and MongoDB database. Features real-time updates and a clean user interface.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 text-xs font-medium bg-slate-800 text-brand-primary rounded-full">MongoDB</span>
+                            <span class="px-3 py-1 text-xs font-medium bg-slate-800 text-brand-primary rounded-full">Express</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="https://todo-app-with-database.onrender.com/" target="_blank" class="flex-1 py-2.5 text-center text-sm font-semibold bg-brand-primary text-brand-dark rounded-lg hover:bg-sky-300 transition-colors">
+                                <i class="fa-solid fa-rocket mr-2"></i>Live Demo
+                            </a>
+                            <a href="https://github.com/MayankJoshi540/todo-app-with-database/" target="_blank" class="flex-1 py-2.5 text-center text-sm font-semibold border border-slate-700 text-white rounded-lg hover:bg-slate-800 transition-colors">
+                                <i class="fa-brands fa-github mr-2"></i>Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- More Projects Link -->
+            <div class="text-center mt-12" data-aos="fade-up">
+                <a href="https://github.com/MayankJoshi540" target="_blank" class="inline-flex items-center text-brand-primary hover:text-white font-medium transition-colors group">
+                    View all projects on GitHub <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-slate-900/50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-brand-card rounded-3xl p-8 md:p-12 border border-slate-800 shadow-2xl" data-aos="zoom-in">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-white mb-4">Let's Build Something Amazing</h2>
+                    <p class="text-brand-muted">I'm currently available for freelance work and full-time opportunities.</p>
+                </div>
+
+                <form action="https://formspree.io/f/movwrlol" method="POST" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-brand-muted mb-2">Name</label>
+                            <input type="text" name="name" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-brand-muted mb-2">Email</label>
+                            <input type="email" name="email" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-brand-muted mb-2">Message</label>
+                        <textarea name="message" rows="5" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors resize-none" placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-brand-primary text-brand-dark font-bold rounded-xl hover:bg-sky-300 transition-all shadow-lg shadow-sky-500/20 transform hover:-translate-y-1">
+                        Send Message
+                    </button>
+                </form>
+
+                <div class="mt-10 flex justify-center gap-8">
+                    <a href="mailto:joshimayank646@gmail.com" class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-brand-muted hover:bg-brand-primary hover:text-brand-dark transition-all transform hover:scale-110">
+                        <i class="fa-solid fa-envelope text-xl"></i>
+                    </a>
+                    <a href="https://github.com/MayankJoshi540" target="_blank" class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-brand-muted hover:bg-brand-primary hover:text-brand-dark transition-all transform hover:scale-110">
+                        <i class="fa-brands fa-github text-xl"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/mayank-joshi-a77935220" target="_blank" class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center text-brand-muted hover:bg-brand-primary hover:text-brand-dark transition-all transform hover:scale-110">
+                        <i class="fa-brands fa-linkedin-in text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-800 text-center">
+        <p class="text-brand-muted text-sm">
+            &copy; 2025 Mayank Joshi. Built with <i class="fa-solid fa-heart text-red-500 mx-1"></i> and Tailwind CSS.
+        </p>
+    </footer>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
