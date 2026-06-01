@@ -30,7 +30,7 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
           className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-white/10 glass-glow mb-8"
         >
-          <span className="w-2 h-2 rounded-full bg-brand-accent animate-ping" />
+          <span className="w-2 h-2 rounded-full bg-green-800 animate-ping" />
           <span className="text-xs font-medium text-brand-text/80 tracking-wide uppercase">Available for work</span>
         </motion.div>
 
