@@ -318,7 +318,11 @@ export default function Home() {
   // Global key bindings
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === "p") {
+      // Toggle Command Palette (Ctrl+P, Ctrl+K, or F1 - case-insensitive)
+      if (
+        ((e.ctrlKey || e.metaKey) && (e.key === "p" || e.key === "P" || e.key === "k" || e.key === "K")) ||
+        e.key === "F1"
+      ) {
         e.preventDefault();
         setIsPaletteOpen(prev => !prev);
         setPaletteQuery("");
@@ -810,7 +814,7 @@ export default function Home() {
           <div className="flex-grow">
             <div className="text-text-high font-bold mb-1">Command Palette Available</div>
             <p className="text-text-dim leading-relaxed mb-3">
-              Press <kbd className="bg-editor-bg px-1.5 py-0.5 rounded border border-editor-border text-accent-amber font-bold">Ctrl + P</kbd> to change IDE themes or jump directly to files.
+              Press <kbd className="bg-editor-bg px-1.5 py-0.5 rounded border border-editor-border text-accent-amber font-bold">Ctrl + P</kbd>, <kbd className="bg-editor-bg px-1.5 py-0.5 rounded border border-editor-border text-accent-amber font-bold">Ctrl + K</kbd> or <kbd className="bg-editor-bg px-1.5 py-0.5 rounded border border-editor-border text-accent-amber font-bold">F1</kbd> to open Command Palette.
             </p>
             <div className="flex gap-2.5">
               <button 
