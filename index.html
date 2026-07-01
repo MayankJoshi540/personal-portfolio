@@ -1,0 +1,2412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mayank Joshi | Portfolio</title>
+  <meta name="description" content="Portfolio of Mayank Joshi, a passionate Full Stack Developer specializing in the MERN Stack and modern web technologies.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* DESIGN SYSTEM & VARIABLES */
+    :root {
+      --bg-dark: #10121a;
+      --bg-sidebar: #0c0d13;
+      --bg-activity: #08090d;
+      --bg-panel: #191c27;
+      --bg-panel-alt: #1f2330;
+      
+      --border: #2b2f42;
+      --border-soft: #222634;
+      
+      --text-high: #f2f1f8;
+      --text-mid: #a8abc4;
+      --text-dim: #6b6e88;
+      
+      --accent-amber: #ffb454;
+      --accent-teal: #5eead4;
+      --accent-coral: #ff6b6b;
+      --accent-violet: #8b85ff;
+      
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --transition-fast: 0.15s ease;
+      --transition-normal: 0.3s ease;
+      
+      --sidebar-width: 240px;
+      --activity-width: 48px;
+      --combined-sidebar: calc(var(--sidebar-width) + var(--activity-width));
+    }
+
+    /* GLOBAL RESET & SETUP */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--text-mid);
+      font-family: var(--font-sans);
+    }
+    
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* KEYBOARD FOCUS STATES */
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--accent-amber);
+      outline-offset: 2px;
+    }
+    
+    /* PREFERS REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto !important;
+      }
+      *, ::before, ::after {
+        animation-delay: -1ms !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        background-attachment: initial !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+      }
+      .pulsing-dot {
+        animation: none !important;
+      }
+    }
+
+    /* SCROLLBARS */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-sidebar);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-dim);
+    }
+
+    /* BACKGROUND TEXTURE */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-size: 24px 24px;
+      background-image: 
+        linear-gradient(to right, var(--border-soft) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--border-soft) 1px, transparent 1px);
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: -10;
+    }
+
+    .bg-glow-1 {
+      position: fixed;
+      top: -10%;
+      left: 10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(139, 133, 255, 0.08) 0%, rgba(16, 18, 26, 0) 70%);
+      pointer-events: none;
+      z-index: -9;
+    }
+
+    .bg-glow-2 {
+      position: fixed;
+      bottom: -10%;
+      right: 10%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(94, 234, 212, 0.06) 0%, rgba(16, 18, 26, 0) 70%);
+      pointer-events: none;
+      z-index: -9;
+    }
+
+    /* WINDOW SYSTEM */
+    .window-bar {
+      height: 35px;
+      background-color: var(--bg-activity);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      user-select: none;
+    }
+
+    .window-menu {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    
+    .window-menu span {
+      cursor: default;
+    }
+    
+    .window-menu span:hover {
+      color: var(--text-high);
+    }
+
+    .window-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-violet);
+    }
+
+    .window-title {
+      font-size: 12px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .win-btn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    
+    .win-close { background-color: var(--accent-coral); }
+    .win-min { background-color: var(--accent-amber); }
+    .win-max { background-color: var(--accent-teal); }
+
+    /* LAYOUT CONTAINER */
+    .app-wrapper {
+      display: flex;
+      margin-top: 35px; /* space for window bar */
+      min-height: calc(100vh - 35px);
+      position: relative;
+    }
+
+    /* SIDEBAR SYSTEM */
+    .sidebar-container {
+      display: flex;
+      width: var(--combined-sidebar);
+      height: calc(100vh - 35px);
+      position: fixed;
+      top: 35px;
+      left: 0;
+      border-right: 1px solid var(--border);
+      background-color: var(--bg-sidebar);
+      z-index: 80;
+      transition: transform var(--transition-normal);
+    }
+
+    /* 1. Activity Bar */
+    .activity-bar {
+      width: var(--activity-width);
+      background-color: var(--bg-activity);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    .activity-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .activity-btn {
+      color: var(--text-dim);
+      background: none;
+      border: none;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 4px 0;
+      position: relative;
+      cursor: pointer;
+      transition: color var(--transition-fast);
+    }
+
+    .activity-btn:hover {
+      color: var(--text-high);
+    }
+
+    .activity-btn.active {
+      color: var(--accent-violet);
+    }
+
+    .activity-btn.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: var(--accent-violet);
+    }
+
+    /* 2. File Explorer Sidebar */
+    .explorer-sidebar {
+      width: var(--sidebar-width);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .explorer-top {
+      padding: 12px 0;
+    }
+
+    .explorer-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-dim);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 0 20px 12px 20px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .file-tree-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-mid);
+      padding: 10px 20px;
+      cursor: default;
+      user-select: none;
+    }
+
+    .file-list {
+      list-style: none;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 30px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: all var(--transition-fast);
+      border-left: 2px solid transparent;
+      user-select: none;
+    }
+
+    .nav-link:hover {
+      color: var(--text-high);
+      background-color: var(--bg-panel);
+    }
+
+    .nav-link.active {
+      color: var(--text-high);
+      background-color: var(--bg-panel-alt);
+      border-left-color: var(--accent-amber);
+    }
+
+    .file-icon {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Profile Card at bottom of sidebar */
+    .profile-card {
+      border-top: 1px solid var(--border);
+      padding: 16px 20px;
+      background-color: rgba(12, 13, 19, 0.5);
+    }
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .profile-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-violet), var(--accent-teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-high);
+      font-weight: 800;
+      font-family: var(--font-mono);
+      font-size: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .profile-text {
+      min-width: 0;
+    }
+
+    .profile-name {
+      color: var(--text-high);
+      font-weight: 700;
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .profile-role {
+      color: var(--text-dim);
+      font-size: 11px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: var(--font-mono);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 12px;
+      background-color: rgba(94, 234, 212, 0.06);
+      border: 1px solid rgba(94, 234, 212, 0.15);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-teal);
+    }
+
+    .pulsing-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent-teal);
+      box-shadow: 0 0 8px var(--accent-teal);
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0% { transform: scale(0.95); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px var(--accent-teal); }
+      100% { transform: scale(0.95); opacity: 0.5; }
+    }
+
+    /* Social chips at bottom of sidebar */
+    .sidebar-socials {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .social-chip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background-color: var(--bg-activity);
+      color: var(--text-mid);
+      text-decoration: none;
+      transition: all var(--transition-fast);
+    }
+
+    .social-chip:hover {
+      border-color: var(--accent-violet);
+      color: var(--text-high);
+      background-color: var(--bg-panel);
+    }
+
+    .social-chip svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* CONTENT WRAPPER */
+    .content-container {
+      flex: 1;
+      margin-left: var(--combined-sidebar);
+      min-width: 0;
+      position: relative;
+    }
+
+    /* STICKY TAB BAR */
+    .tab-bar {
+      height: 38px;
+      background-color: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      position: sticky;
+      top: 35px; /* height of window-bar */
+      z-index: 50;
+    }
+    
+    .tab-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 16px;
+      height: 100%;
+      border-right: 1px solid var(--border);
+      background-color: var(--bg-sidebar);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: all var(--transition-fast);
+      position: relative;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .tab-link:hover {
+      background-color: rgba(25, 28, 39, 0.5);
+      color: var(--text-mid);
+    }
+
+    .tab-link.active {
+      background-color: var(--bg-dark);
+      color: var(--text-high);
+    }
+
+    .tab-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--accent-amber);
+    }
+
+    .tab-close {
+      font-size: 10px;
+      margin-left: 4px;
+      color: var(--text-dim);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .tab-link:hover .tab-close, .tab-link.active .tab-close {
+      opacity: 1;
+    }
+    
+    .tab-close:hover {
+      color: var(--accent-coral);
+    }
+
+    /* BREADCRUMBS BAR */
+    .breadcrumbs {
+      height: 24px;
+      background-color: var(--bg-dark);
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      user-select: none;
+    }
+
+    .breadcrumb-path {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .breadcrumb-path span.divider {
+      color: var(--text-dim);
+      opacity: 0.5;
+    }
+
+    .breadcrumb-active {
+      color: var(--text-mid);
+    }
+
+    /* MAIN CONTENT VIEW */
+    .editor-body {
+      padding: 40px 60px 80px 60px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .editor-section {
+      margin-bottom: 96px;
+    }
+
+    .comment-line {
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      font-size: 14px;
+      margin-bottom: 16px;
+      user-select: none;
+    }
+
+    /* CODE STYLING HEADERS */
+    .code-header {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      color: var(--text-mid);
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 12px;
+    }
+    
+    .code-footer {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-dim);
+      margin-top: 24px;
+    }
+
+    .token-keyword { color: var(--accent-violet); font-weight: 700; }
+    .token-variable { color: var(--text-high); }
+    .token-function { color: var(--accent-teal); }
+    .token-string { color: var(--accent-amber); }
+    .token-punctuation { color: var(--text-dim); }
+    .token-class { color: var(--accent-violet); }
+
+    /* SECTION 1: ABOUT / HERO */
+    .hero-wrapper {
+      padding-top: 20px;
+    }
+
+    .hero-title {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--text-high);
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin: 24px 0;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-violet) 50%, var(--accent-teal) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--text-mid);
+      margin-bottom: 32px;
+      max-width: 720px;
+    }
+
+    .meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .meta-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-mid);
+    }
+
+    .pill-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--accent-teal);
+    }
+
+    .cta-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-amber);
+      color: #0c0d13;
+    }
+
+    .btn-primary:hover {
+      background-color: #ffd27a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255, 180, 84, 0.25);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border-color: var(--border);
+      color: var(--text-high);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-panel);
+      border-color: var(--text-dim);
+      transform: translateY(-2px);
+    }
+
+    .btn-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* SECTION 2: EXPERIENCE (GIT LOG TIMELINE) */
+    .git-timeline {
+      position: relative;
+      padding-left: 24px;
+      margin: 32px 0;
+    }
+
+    .git-timeline::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      bottom: 8px;
+      left: 7px;
+      width: 2px;
+      background-image: linear-gradient(to bottom, var(--border) 60%, transparent 40%);
+      background-size: 2px 10px;
+      background-repeat: repeat-y;
+    }
+
+    .git-entry {
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .git-entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .git-node {
+      position: absolute;
+      left: -24px;
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: var(--bg-dark);
+      border: 2px solid var(--accent-violet);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .git-node::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent-violet);
+      transition: all var(--transition-fast);
+    }
+
+    .git-entry:hover .git-node::after {
+      background-color: var(--accent-teal);
+      transform: scale(1.3);
+    }
+
+    .git-card {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      transition: border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .git-card:hover {
+      border-color: var(--border-soft);
+      transform: translateY(-2px);
+    }
+
+    .git-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .git-hash {
+      color: var(--accent-amber);
+    }
+
+    .git-date {
+      color: var(--text-dim);
+    }
+
+    .git-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-high);
+      margin-bottom: 6px;
+    }
+
+    .git-org {
+      color: var(--accent-teal);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .diff-block {
+      background-color: var(--bg-sidebar);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+
+    .diff-line {
+      white-space: pre-wrap;
+      color: var(--text-mid);
+    }
+    
+    .diff-line.plus {
+      color: #a6e22e; /* Classic terminal git diff green */
+    }
+
+    /* SECTION 3: EDUCATION (CARD GRID) */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    @media (min-width: 720px) {
+      .edu-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .edu-card {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all var(--transition-fast);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .edu-card:hover {
+      border-color: var(--accent-violet);
+      transform: translateY(-2px);
+    }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+
+    .edu-degree {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: var(--text-high);
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .edu-date {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    .edu-school {
+      color: var(--accent-violet);
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .edu-note {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-mid);
+    }
+
+    /* SECTION 4: PROJECTS (TERMINAL WINDOW CARDS) */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    @media (min-width: 720px) {
+      .projects-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .project-window {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      transition: all var(--transition-fast);
+    }
+
+    .project-window:hover {
+      border-color: var(--accent-teal);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(94, 234, 212, 0.08);
+    }
+
+    .titlebar {
+      height: 32px;
+      background-color: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      position: relative;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .window-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .window-filename {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      user-select: none;
+    }
+
+    .window-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      flex: 1;
+    }
+
+    .project-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-high);
+      margin-bottom: 12px;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-mid);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+
+    .tech-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background-color: rgba(139, 133, 255, 0.06);
+      border: 1px solid rgba(139, 133, 255, 0.15);
+      color: var(--accent-violet);
+    }
+
+    .project-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--transition-fast);
+    }
+
+    .project-link.live {
+      color: var(--accent-teal);
+    }
+
+    .project-link.live:hover {
+      color: #99f6e4;
+      text-decoration: underline;
+    }
+
+    .project-link.git {
+      color: var(--text-dim);
+    }
+
+    .project-link.git:hover {
+      color: var(--text-high);
+    }
+
+    .project-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* SECTION 5: SKILLS (JSON OBJECT BLOCK) */
+    .json-wrapper {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .json-key {
+      color: var(--accent-amber);
+    }
+
+    .json-bracket {
+      color: var(--text-dim);
+    }
+
+    .skills-block {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px 0 8px 24px;
+      vertical-align: middle;
+    }
+
+    .skill-pill {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-high);
+      background-color: var(--bg-dark);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: all var(--transition-fast);
+      cursor: default;
+    }
+
+    .skill-pill:hover {
+      border-color: var(--accent-amber);
+      transform: translateY(-1px);
+    }
+
+    /* SECTION 6: ACHIEVEMENTS */
+    .achievements-wrapper {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.8;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .ach-line {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .ach-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .ach-checkbox {
+      color: var(--accent-teal);
+      font-weight: 800;
+      margin-right: 12px;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .ach-content {
+      color: var(--text-mid);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    
+    .ach-content strong {
+      color: var(--text-high);
+    }
+
+    /* SECTION 7: CONTACT (TERMINAL WINDOW & FORM) */
+    .terminal-window {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      margin: 32px 0;
+    }
+
+    .terminal-bar {
+      height: 32px;
+      background-color: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      position: relative;
+    }
+
+    .terminal-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .terminal-body {
+      padding: 24px;
+      font-family: var(--font-mono);
+      color: var(--text-high);
+    }
+
+    .terminal-prompt-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+    }
+
+    .prompt-char {
+      color: var(--accent-teal);
+      font-weight: 700;
+    }
+
+    .command-text {
+      color: var(--text-high);
+    }
+
+    /* TERMINAL FORM FIELDS */
+    .terminal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .terminal-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .terminal-label {
+      font-size: 11px;
+      color: var(--accent-violet);
+      font-weight: 700;
+    }
+
+    .terminal-input-wrap {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding: 6px 0;
+      position: relative;
+    }
+    
+    .terminal-input-wrap::before {
+      content: '$';
+      color: var(--accent-teal);
+      margin-right: 8px;
+      font-size: 13px;
+      font-family: var(--font-mono);
+    }
+
+    .t-input {
+      background: transparent;
+      border: none;
+      color: var(--text-high);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      width: 100%;
+      outline: none;
+    }
+
+    .t-input::placeholder {
+      color: var(--text-dim);
+      opacity: 0.5;
+    }
+
+    .t-textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .terminal-submit-btn {
+      align-self: flex-start;
+      background: transparent;
+      border: 1px solid var(--accent-amber);
+      color: var(--accent-amber);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all var(--transition-fast);
+    }
+
+    .terminal-submit-btn:hover {
+      background-color: rgba(255, 180, 84, 0.08);
+      transform: translateY(-1px);
+    }
+    
+    .terminal-submit-btn:active {
+      transform: translateY(0);
+    }
+
+    /* TERMINAL LOGGER */
+    .terminal-log-box {
+      margin-top: 24px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: none; /* revealed on submit */
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-mid);
+    }
+
+    .log-line {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .log-spinner {
+      color: var(--accent-violet);
+    }
+    
+    .log-success {
+      color: var(--accent-teal);
+      font-weight: 700;
+    }
+
+    .contact-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background-color: var(--bg-panel);
+      color: var(--text-high);
+      font-size: 13px;
+      font-family: var(--font-mono);
+      text-decoration: none;
+      transition: all var(--transition-fast);
+    }
+
+    .contact-pill:hover {
+      border-color: var(--accent-violet);
+      background-color: var(--bg-panel-alt);
+      transform: translateY(-2px);
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      background-color: var(--bg-sidebar);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .heart-icon {
+      color: var(--accent-coral);
+      animation: heart-beat 1.5s infinite;
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+    }
+
+    @keyframes heart-beat {
+      0% { transform: scale(1); }
+      14% { transform: scale(1.15); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.15); }
+      70% { transform: scale(1); }
+    }
+
+    /* STATUS BAR (BOTTOM) */
+    .status-bar {
+      height: 22px;
+      background-color: var(--accent-violet);
+      color: #08090d;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      user-select: none;
+    }
+
+    .status-left, .status-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* MOBILE NAVIGATION ELEMENTS */
+    .mobile-header {
+      display: none;
+      height: 48px;
+      background-color: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border);
+      position: fixed;
+      top: 35px; /* below window bar */
+      left: 0;
+      right: 0;
+      z-index: 90;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+    }
+
+    .hamburger-btn {
+      background: none;
+      border: none;
+      color: var(--text-high);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-title {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-mid);
+      font-weight: 700;
+    }
+
+    .scrim {
+      position: fixed;
+      inset: 0;
+      top: 35px;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(2px);
+      z-index: 70;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+
+    .scrim.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* RESPONSIVE LAYOUT ADJUSTMENTS */
+    @media (max-width: 860px) {
+      .sidebar-container {
+        transform: translateX(-100%);
+      }
+      
+      .sidebar-container.open {
+        transform: translateX(0);
+      }
+
+      .mobile-header {
+        display: flex;
+      }
+
+      .content-container {
+        margin-left: 0;
+        padding-top: 48px; /* space for mobile-header */
+      }
+
+      .tab-bar {
+        top: 83px; /* window-bar (35px) + mobile-header (48px) */
+      }
+
+      .editor-body {
+        padding: 24px 20px 60px 20px;
+      }
+      
+      .hero-title {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND TEXTURES -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <!-- WINDOW DECORATIVE TOP BAR -->
+  <div class="window-bar">
+    <div class="window-logo">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    </div>
+    <div class="window-menu">
+      <span>File</span>
+      <span>Edit</span>
+      <span>Selection</span>
+      <span>View</span>
+      <span>Go</span>
+      <span>Terminal</span>
+      <span>Help</span>
+    </div>
+    <div class="window-title">mayank-joshi-portfolio - Visual Studio Code</div>
+    <div class="window-controls">
+      <span class="win-btn win-min"></span>
+      <span class="win-btn win-max"></span>
+      <span class="win-btn win-close"></span>
+    </div>
+  </div>
+
+  <!-- MOBILE HEADER BAR -->
+  <div class="mobile-header">
+    <button class="hamburger-btn" id="hamburger" aria-label="Toggle Navigation">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="mobile-title">Mayank Joshi | Portfolio</div>
+    <div class="status-badge" style="padding: 2px 6px;">
+      <span class="pulsing-dot"></span>
+    </div>
+  </div>
+
+  <!-- BACKDROP OVERLAY FOR MOBILE SIDEBAR -->
+  <div class="scrim" id="scrim"></div>
+
+  <!-- APP LAYOUT WRAPPER -->
+  <div class="app-wrapper">
+
+    <!-- SIDEBAR CONTAINER -->
+    <div class="sidebar-container" id="sidebar">
+      
+      <!-- 1. Activity Bar -->
+      <div class="activity-bar">
+        <div class="activity-group">
+          <button class="activity-btn active" title="Explorer" aria-label="Explorer">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+          </button>
+          <button class="activity-btn" title="Search" aria-label="Search">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+          <button class="activity-btn" title="Source Control" aria-label="Source Control">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg>
+          </button>
+          <button class="activity-btn" title="Run and Debug" aria-label="Run and Debug">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg>
+          </button>
+          <button class="activity-btn" title="Extensions" aria-label="Extensions">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </button>
+        </div>
+        <div class="activity-group">
+          <button class="activity-btn" title="Account" aria-label="Account">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
+          <button class="activity-btn" title="Settings" aria-label="Settings">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Explorer File Tree -->
+      <div class="explorer-sidebar">
+        <div class="explorer-top">
+          <div class="explorer-title">Explorer</div>
+          <div class="file-tree-header">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            <span>PORTFOLIO [WORKSPACE]</span>
+          </div>
+          <ul class="file-list">
+            <li>
+              <a href="#about" class="nav-link active">
+                <span class="file-icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="#51a1fc"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 11.5v-3l-2.25 2.25L9.5 11.5v3H8v-5h1.5l2.25 2.25L14 9.5H15.5v5h-1.5zM19 12l-2.5 3v-2H15v-2h1.5V9l2.5 3z"/></svg>
+                </span>
+                <span>about.md</span>
+              </a>
+            </li>
+            <li>
+              <a href="#experience" class="nav-link">
+                <span class="file-icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#8b85ff" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+                </span>
+                <span>experience.log</span>
+              </a>
+            </li>
+            <li>
+              <a href="#education" class="nav-link">
+                <span class="file-icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#ffb454" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="12" x2="10" y2="12"/><line x1="12" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="10" y2="16"/><line x1="12" y1="16" x2="16" y2="16"/></svg>
+                </span>
+                <span>education.yml</span>
+              </a>
+            </li>
+            <li>
+              <a href="#projects" class="nav-link">
+                <span class="file-icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14"><rect width="24" height="24" rx="3" fill="#f1e05a"/><path d="M12.5 15.5c.3.5.8.8 1.5.8 1 0 1.5-.5 1.5-1.5v-5h1.8v5c0 2-1.2 3.2-3.3 3.2-1.5 0-2.6-.7-3.1-1.7l1.6-.8zm-6.8-2c.1 1.2.9 2 2.3 2 1.2 0 2.1-.7 2.1-1.7 0-1-.6-1.5-2-2l-.8-.3c-.9-.3-1.3-.7-1.3-1.3 0-.7.6-1.2 1.5-1.2.9 0 1.5.4 1.7 1.1l1.6-.9c-.4-1.2-1.5-2-3.3-2-2.1 0-3.3 1.2-3.3 2.9 0 1.4.8 2.1 2.2 2.6l.8.3c1 .3 1.4.6 1.4 1.3 0 .8-.7 1.3-1.6 1.3-1.1 0-1.8-.5-2-1.3l-1.6.8z" fill="#000"/></svg>
+                </span>
+                <span>projects.js</span>
+              </a>
+            </li>
+            <li>
+              <a href="#skills" class="nav-link">
+                <span class="file-icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#5eead4" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 12c-1 0-1.5-.5-1.5-1.5v-1c0-.8-.7-1.5-1.5-1.5v0c.8 0 1.5-.7 1.5-1.5v-1C6.5 4.5 7 4 8 4M16 12c1 0 1.5-.5 1.5-1.5v-1c0-.8.7-1.5 1.5-1.5v0c-.8 0-1.5-.7-1.5-1.5v-1C17.5 4.5 17 4 16 4"/></svg>
+                </span>
+                <span>skills.json</span>
+              </a>
+            </li>
+            <li>
+              <a href="#achievements" class="nav-link">
+                <span class="file-icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#a8abc4" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="8 14 10 16 14 11"/></svg>
+                </span>
+                <span>achievements.txt</span>
+              </a>
+            </li>
+            <li>
+              <a href="#contact" class="nav-link">
+                <span class="file-icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#41aa58" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="8 12 11 15 8 18"/><line x1="13" y1="18" x2="17" y2="18"/></svg>
+                </span>
+                <span>contact.sh</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Bottom Panel -->
+        <div class="profile-card">
+          <div class="profile-info">
+            <div class="profile-avatar">MJ</div>
+            <div class="profile-text">
+              <div class="profile-name">Mayank Joshi</div>
+              <div class="profile-role">Full Stack Developer</div>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="status-badge">
+              <span class="pulsing-dot"></span>
+              <span>Available</span>
+            </div>
+          </div>
+          <div class="sidebar-socials">
+            <a href="https://github.com/MayankJoshi540" target="_blank" rel="noopener noreferrer" class="social-chip" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/mayank-joshi-a77935220" target="_blank" rel="noopener noreferrer" class="social-chip" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="mailto:joshimayank646@gmail.com" class="social-chip" title="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MAIN EDITOR CONTAINER -->
+    <div class="content-container">
+      
+      <!-- Sticky Tab Bar -->
+      <div class="tab-bar">
+        <a href="#about" class="tab-link active">
+          <span class="file-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="#51a1fc"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 11.5v-3l-2.25 2.25L9.5 11.5v3H8v-5h1.5l2.25 2.25L14 9.5H15.5v5h-1.5zM19 12l-2.5 3v-2H15v-2h1.5V9l2.5 3z"/></svg>
+          </span>
+          <span>about.md</span>
+          <span class="tab-close">&times;</span>
+        </a>
+        <a href="#experience" class="tab-link">
+          <span class="file-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#8b85ff" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+          </span>
+          <span>experience.log</span>
+          <span class="tab-close">&times;</span>
+        </a>
+        <a href="#education" class="tab-link">
+          <span class="file-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#ffb454" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="12" x2="10" y2="12"/><line x1="12" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="10" y2="16"/><line x1="12" y1="16" x2="16" y2="16"/></svg>
+          </span>
+          <span>education.yml</span>
+          <span class="tab-close">&times;</span>
+        </a>
+        <a href="#projects" class="tab-link">
+          <span class="file-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12"><rect width="24" height="24" rx="3" fill="#f1e05a"/><path d="M12.5 15.5c.3.5.8.8 1.5.8 1 0 1.5-.5 1.5-1.5v-5h1.8v5c0 2-1.2 3.2-3.3 3.2-1.5 0-2.6-.7-3.1-1.7l1.6-.8zm-6.8-2c.1 1.2.9 2 2.3 2 1.2 0 2.1-.7 2.1-1.7 0-1-.6-1.5-2-2l-.8-.3c-.9-.3-1.3-.7-1.3-1.3 0-.7.6-1.2 1.5-1.2.9 0 1.5.4 1.7 1.1l1.6-.9c-.4-1.2-1.5-2-3.3-2-2.1 0-3.3 1.2-3.3 2.9 0 1.4.8 2.1 2.2 2.6l.8.3c1 .3 1.4.6 1.4 1.3 0 .8-.7 1.3-1.6 1.3-1.1 0-1.8-.5-2-1.3l-1.6.8z" fill="#000"/></svg>
+          </span>
+          <span>projects.js</span>
+          <span class="tab-close">&times;</span>
+        </a>
+        <a href="#skills" class="tab-link">
+          <span class="file-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#5eead4" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 12c-1 0-1.5-.5-1.5-1.5v-1c0-.8-.7-1.5-1.5-1.5v0c.8 0 1.5-.7 1.5-1.5v-1C6.5 4.5 7 4 8 4M16 12c1 0 1.5-.5 1.5-1.5v-1c0-.8.7-1.5 1.5-1.5v0c-.8 0-1.5-.7-1.5-1.5v-1C17.5 4.5 17 4 16 4"/></svg>
+          </span>
+          <span>skills.json</span>
+          <span class="tab-close">&times;</span>
+        </a>
+        <a href="#achievements" class="tab-link">
+          <span class="file-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#a8abc4" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="8 14 10 16 14 11"/></svg>
+          </span>
+          <span>achievements.txt</span>
+          <span class="tab-close">&times;</span>
+        </a>
+        <a href="#contact" class="tab-link">
+          <span class="file-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#41aa58" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="8 12 11 15 8 18"/><line x1="13" y1="18" x2="17" y2="18"/></svg>
+          </span>
+          <span>contact.sh</span>
+          <span class="tab-close">&times;</span>
+        </a>
+      </div>
+
+      <!-- Breadcrumbs Bar -->
+      <div class="breadcrumbs">
+        <div class="breadcrumb-path">
+          <span>mayank-joshi</span>
+          <span class="divider">&gt;</span>
+          <span>src</span>
+          <span class="divider">&gt;</span>
+          <span>sections</span>
+          <span class="divider">&gt;</span>
+          <span class="breadcrumb-active" id="breadcrumb-file">about.md</span>
+        </div>
+      </div>
+
+      <!-- Editor Scrollable Body Content -->
+      <div class="editor-body">
+
+        <!-- 1. ABOUT / HERO SECTION (about.md) -->
+        <section id="about" class="editor-section">
+          <div class="comment-line">// about.md</div>
+          
+          <div class="code-header">
+            <span class="token-keyword">const</span> <span class="token-variable">developer</span> = {
+            <br>&nbsp;&nbsp;name: <span class="token-string">"Mayank Joshi"</span>,
+            <br>&nbsp;&nbsp;role: <span class="token-string">"Full Stack Web Developer"</span>,
+            <br>&nbsp;&nbsp;specialty: <span class="token-string">"MERN Stack &amp; Next.js"</span>
+            <br>};
+          </div>
+
+          <div class="hero-wrapper">
+            <h1 class="hero-title">
+              Engineering web products that are <span class="gradient-text">functional &amp; beautiful</span>.
+            </h1>
+            
+            <p class="hero-desc">
+              Hi, I'm <strong style="color: var(--text-high);">Mayank Joshi</strong>. I build immersive, high-performance web experiences. With deep knowledge of the React ecosystem and backend engineering, I transform complex ideas into production-ready software.
+            </p>
+
+            <div class="meta-pills">
+              <div class="meta-pill">
+                <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Delhi, India</span>
+              </div>
+              <div class="meta-pill">
+                <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+                <span>BCA (Hons.) Student</span>
+              </div>
+              <div class="meta-pill">
+                <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <span>Full Stack / MERN</span>
+              </div>
+            </div>
+
+            <div class="cta-container">
+              <a href="#contact" class="btn btn-primary">
+                <span>Contact Me</span>
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+              <a href="public/resume.pdf" download class="btn btn-secondary">
+                <span>Download Resume</span>
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. EXPERIENCE SECTION (experience.log) -->
+        <section id="experience" class="editor-section">
+          <div class="comment-line">// experience.log</div>
+          
+          <div class="code-header">
+            <span class="token-keyword">const</span> <span class="token-variable">experienceHistory</span> = [
+          </div>
+
+          <div class="git-timeline">
+            <!-- Entry 1 -->
+            <div class="git-entry">
+              <div class="git-node"></div>
+              <div class="git-card">
+                <div class="git-meta">
+                  <span class="git-hash">commit 82e5b9f</span>
+                  <span class="git-date">Jan 2026 — March 2026</span>
+                </div>
+                <h3 class="git-title">Full Stack Developer – Internship</h3>
+                <span class="git-org">Global Education Talent</span>
+                <div class="diff-block">
+                  <div class="diff-line plus">+ Assisted in developing full-stack web features using modern JavaScript frameworks and backend technologies.</div>
+                  <div class="diff-line plus">+ Implemented reusable frontend React components and integrated them with Node.js APIs.</div>
+                  <div class="diff-line plus">+ Used Git/GitHub for version control and collaborated with team members in a hybrid environment.</div>
+                  <div class="diff-line plus">+ Gained hands-on experience in debugging, deployment configurations, and production release flows.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Entry 2 -->
+            <div class="git-entry">
+              <div class="git-node"></div>
+              <div class="git-card">
+                <div class="git-meta">
+                  <span class="git-hash">commit d498ab5</span>
+                  <span class="git-date">2024 — Present</span>
+                </div>
+                <h3 class="git-title">Technical Team Member</h3>
+                <span class="git-org">MSI Tech Society</span>
+                <div class="diff-block">
+                  <div class="diff-line plus">+ Contributed to development and maintenance of internal projects, event websites, and automation scripts.</div>
+                  <div class="diff-line plus">+ Coordinated technical operations, web deployments, and networking setups during major college hackathons.</div>
+                  <div class="diff-line plus">+ Collaborated with peers to design, build, and execute tech-related initiatives while enforcing quality code reviews.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Entry 3 -->
+            <div class="git-entry">
+              <div class="git-node"></div>
+              <div class="git-card">
+                <div class="git-meta">
+                  <span class="git-hash">commit f210a4e</span>
+                  <span class="git-date">2025</span>
+                </div>
+                <h3 class="git-title">Freelance Web Developer</h3>
+                <span class="git-org">Personal Brand &amp; Commercial Websites</span>
+                <div class="diff-block">
+                  <div class="diff-line plus">+ Designed and architected clean-coded personal brand portfolios and commercial web systems in React/Next.js.</div>
+                  <div class="diff-line plus">+ Structured components for responsiveness, optimal search-engine friendliness, and cross-browser speeds.</div>
+                  <div class="diff-line plus">+ Worked directly with clients to translate visual designs and system specifications into operational apps.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Entry 4 -->
+            <div class="git-entry">
+              <div class="git-node"></div>
+              <div class="git-card">
+                <div class="git-meta">
+                  <span class="git-hash">commit c39fa12</span>
+                  <span class="git-date">2024 — Present</span>
+                </div>
+                <h3 class="git-title">Private Tutor – Mathematics &amp; Accountancy</h3>
+                <span class="git-org">Academic Tutoring</span>
+                <div class="diff-block">
+                  <div class="diff-line plus">+ Provided private teaching to Class 12th students, explaining complex concepts through systematic, logical formats.</div>
+                  <div class="diff-line plus">+ Strengthened communication, leadership, and time-management competencies by handling students simultaneously.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-footer">
+            ];
+          </div>
+        </section>
+
+        <!-- 3. EDUCATION SECTION (education.yml) -->
+        <section id="education" class="editor-section">
+          <div class="comment-line"># education.yml</div>
+          
+          <div class="code-header">
+            <span class="token-keyword">education:</span>
+          </div>
+
+          <div class="edu-grid">
+            <div class="edu-card">
+              <div class="edu-header">
+                <div class="edu-degree">Bachelor of Computer Application (Hons.)</div>
+                <div class="edu-date">2024 — 2028</div>
+              </div>
+              <div class="edu-school">Maharaja Surajmal Institute, Janakpuri, New Delhi</div>
+              <div class="edu-note">Affiliated with Guru Gobind Singh Indraprastha University (GGSIPU). Pursuing Hons. with strong academic standings. Focused on Software Engineering, Data Structures, Algorithms, and Web Architectures.</div>
+            </div>
+
+            <div class="edu-card">
+              <div class="edu-header">
+                <div class="edu-degree">Class 12th – Commerce with Mathematics</div>
+                <div class="edu-date">2023 — 2024</div>
+              </div>
+              <div class="edu-school">Central Board of Secondary Education (CBSE)</div>
+              <div class="edu-note">Completed senior school education with high excellence. Attained a top score of 93% in best 4 subjects, specializing in advanced Mathematics and Business Commerce.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. PROJECTS SECTION (projects.js) -->
+        <section id="projects" class="editor-section">
+          <div class="comment-line">// projects.js</div>
+          
+          <div class="code-header">
+            <span class="token-keyword">const</span> <span class="token-variable">projectsList</span> = [
+          </div>
+
+          <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-window">
+              <div class="titlebar">
+                <div class="window-dots">
+                  <span class="window-dot win-close"></span>
+                  <span class="window-dot win-min"></span>
+                  <span class="window-dot win-max"></span>
+                </div>
+                <span class="window-filename">prepwise_ai.tsx</span>
+              </div>
+              <div class="window-body">
+                <h3 class="project-name">PrepWiseAi – AI Interview platform</h3>
+                <p class="project-desc">A full-stack platform generating mock interviews and real-time structured feedback based on skills and roles. Uses Gemini AI to power custom questions and grading.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">Next.js</span>
+                  <span class="tech-tag">TypeScript</span>
+                  <span class="tech-tag">Tailwind CSS</span>
+                  <span class="tech-tag">Clerk</span>
+                  <span class="tech-tag">Gemini AI</span>
+                </div>
+                <div class="project-links">
+                  <a href="#" class="project-link live">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    <span>Live Preview</span>
+                  </a>
+                  <a href="https://github.com/MayankJoshi540" target="_blank" rel="noopener noreferrer" class="project-link git" title="GitHub Source">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-window">
+              <div class="titlebar">
+                <div class="window-dots">
+                  <span class="window-dot win-close"></span>
+                  <span class="window-dot win-min"></span>
+                  <span class="window-dot win-max"></span>
+                </div>
+                <span class="window-filename">moodroom.js</span>
+              </div>
+              <div class="window-body">
+                <h3 class="project-name">MoodRoom – Collaborative Space</h3>
+                <p class="project-desc">Real-time collaborative vibe-space where users study, code, and chill together in ambient, customized environments like rainy nights and lo-fi coffee shops.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">Next.js</span>
+                  <span class="tech-tag">Socket.io</span>
+                  <span class="tech-tag">Framer Motion</span>
+                  <span class="tech-tag">Tailwind CSS</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://mood-room-iota.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link live">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    <span>Live Preview</span>
+                  </a>
+                  <a href="https://github.com/MayankJoshi540" target="_blank" rel="noopener noreferrer" class="project-link git" title="GitHub Source">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-window">
+              <div class="titlebar">
+                <div class="window-dots">
+                  <span class="window-dot win-close"></span>
+                  <span class="window-dot win-min"></span>
+                  <span class="window-dot win-max"></span>
+                </div>
+                <span class="window-filename">secrets.js</span>
+              </div>
+              <div class="window-body">
+                <h3 class="project-name">Secrets App – Anonymous Portal</h3>
+                <p class="project-desc">A highly secure authentication platform for sharing secrets anonymously. Focuses on sessions, hashing, database storage security, and clean user experience.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">Node.js</span>
+                  <span class="tech-tag">MongoDB</span>
+                  <span class="tech-tag">Passport.js</span>
+                  <span class="tech-tag">Express</span>
+                </div>
+                <div class="project-links">
+                  <a href="https://secrets-app-production.up.railway.app/" target="_blank" rel="noopener noreferrer" class="project-link live">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    <span>Live Preview</span>
+                  </a>
+                  <a href="https://github.com/MayankJoshi540/secrets-app" target="_blank" rel="noopener noreferrer" class="project-link git" title="GitHub Source">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-window">
+              <div class="titlebar">
+                <div class="window-dots">
+                  <span class="window-dot win-close"></span>
+                  <span class="window-dot win-min"></span>
+                  <span class="window-dot win-max"></span>
+                </div>
+                <span class="window-filename">ibuiltthis.ts</span>
+              </div>
+              <div class="window-body">
+                <h3 class="project-name">iBuiltThis – Project Showcase</h3>
+                <p class="project-desc">A modern, responsive platform designed for developers to share and showcase projects. Focused on responsive layouts, clean layouts, and rapid deployments.</p>
+                <div class="tech-tags">
+                  <span class="tech-tag">Next.js</span>
+                  <span class="tech-tag">React</span>
+                  <span class="tech-tag">Tailwind CSS</span>
+                  <span class="tech-tag">Vercel</span>
+                </div>
+                <div class="project-links">
+                  <a href="#" class="project-link live">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    <span>Live Preview</span>
+                  </a>
+                  <a href="https://github.com/MayankJoshi540" target="_blank" rel="noopener noreferrer" class="project-link git" title="GitHub Source">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-footer">
+            ];
+          </div>
+        </section>
+
+        <!-- 5. SKILLS SECTION (skills.json) -->
+        <section id="skills" class="editor-section">
+          <div class="comment-line">// skills.json</div>
+          
+          <div class="json-wrapper">
+            <span class="json-bracket">{</span>
+            <br>&nbsp;&nbsp;<span class="json-key">"languages"</span>: <span class="json-bracket">[</span>
+            <div class="skills-block">
+              <span class="skill-pill">JavaScript</span>
+              <span class="skill-pill">HTML/CSS</span>
+              <span class="skill-pill">C++</span>
+              <span class="skill-pill">C</span>
+              <span class="skill-pill">Java</span>
+              <span class="skill-pill">SQL</span>
+            </div>
+            <br>&nbsp;&nbsp;<span class="json-bracket">]</span>,
+            <br>&nbsp;&nbsp;<span class="json-key">"frameworks_and_libraries"</span>: <span class="json-bracket">[</span>
+            <div class="skills-block">
+              <span class="skill-pill">React.js</span>
+              <span class="skill-pill">Next.js</span>
+              <span class="skill-pill">Node.js</span>
+              <span class="skill-pill">Express.js</span>
+              <span class="skill-pill">Tailwind CSS</span>
+              <span class="skill-pill">MERN Stack</span>
+              <span class="skill-pill">jQuery</span>
+              <span class="skill-pill">EJS</span>
+            </div>
+            <br>&nbsp;&nbsp;<span class="json-bracket">]</span>,
+            <br>&nbsp;&nbsp;<span class="json-key">"databases"</span>: <span class="json-bracket">[</span>
+            <div class="skills-block">
+              <span class="skill-pill">MongoDB</span>
+              <span class="skill-pill">Mongoose</span>
+              <span class="skill-pill">REST APIs</span>
+            </div>
+            <br>&nbsp;&nbsp;<span class="json-bracket">]</span>,
+            <br>&nbsp;&nbsp;<span class="json-key">"tools_and_platforms"</span>: <span class="json-bracket">[</span>
+            <div class="skills-block">
+              <span class="skill-pill">Git / GitHub</span>
+              <span class="skill-pill">VS Code</span>
+              <span class="skill-pill">Netlify</span>
+              <span class="skill-pill">Vercel</span>
+              <span class="skill-pill">Render</span>
+              <span class="skill-pill">WordPress</span>
+            </div>
+            <br>&nbsp;&nbsp;<span class="json-bracket">]</span>,
+            <br>&nbsp;&nbsp;<span class="json-key">"professional_skills"</span>: <span class="json-bracket">[</span>
+            <div class="skills-block">
+              <span class="skill-pill">Problem Solving</span>
+              <span class="skill-pill">Leadership</span>
+              <span class="skill-pill">Data Structures &amp; Algorithms (C++)</span>
+            </div>
+            <br>&nbsp;&nbsp;<span class="json-bracket">]</span>
+            <br><span class="json-bracket">}</span>
+          </div>
+        </section>
+
+        <!-- 6. ACHIEVEMENTS SECTION (achievements.txt) -->
+        <section id="achievements" class="editor-section">
+          <div class="comment-line">// achievements.txt</div>
+          
+          <div class="code-header">
+            <span class="token-keyword">class</span> <span class="token-class">Achievements</span> {
+          </div>
+
+          <div class="achievements-wrapper">
+            <div class="ach-line">
+              <span class="ach-checkbox">[x]</span>
+              <div class="ach-content">Pursuing a <strong>BCA (Hons.) 3rd year</strong> at <strong>Maharaja Surajmal Institute</strong>, Janakpuri, New Delhi with strong academic standing.</div>
+            </div>
+            <div class="ach-line">
+              <span class="ach-checkbox">[x]</span>
+              <div class="ach-content">Actively solving <strong>Data Structures &amp; Algorithms</strong> questions in <strong>C++</strong> on <strong>LeetCode</strong>.</div>
+            </div>
+            <div class="ach-line">
+              <span class="ach-checkbox">[x]</span>
+              <div class="ach-content">Successfully developed and deployed <strong>3+ production-grade MERN</strong> stack and Next.js applications.</div>
+            </div>
+            <div class="ach-line">
+              <span class="ach-checkbox">[x]</span>
+              <div class="ach-content">Won freelance web development project contract to design and launch commercial brand website with <strong>complete SEO optimization</strong>.</div>
+            </div>
+            <div class="ach-line">
+              <span class="ach-checkbox">[x]</span>
+              <div class="ach-content">Active technical lead and contributor at <strong>MSI Tech Society</strong>, maintaining web software and organizing code structures.</div>
+            </div>
+          </div>
+
+          <div class="code-footer">
+            }
+          </div>
+        </section>
+
+        <!-- 7. CONTACT SECTION (contact.sh) -->
+        <section id="contact" class="editor-section">
+          <div class="comment-line">// contact.sh</div>
+          
+          <div class="code-header">
+            <span class="token-keyword">function</span> <span class="token-function">initiateContact</span>() {
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-bar">
+              <div class="window-dots">
+                <span class="window-dot win-close"></span>
+                <span class="window-dot win-min"></span>
+                <span class="window-dot win-max"></span>
+              </div>
+              <span class="terminal-title">bash - contact.sh</span>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-prompt-line">
+                <span class="prompt-char">$</span>
+                <span class="command-text">./contact.sh --new-message</span>
+              </div>
+
+              <!-- REAL FORM WITH TERMINAL THEME -->
+              <form class="terminal-form" id="contact-form" action="https://formspree.io/f/movwrlol" method="POST">
+                <div class="terminal-field">
+                  <label class="terminal-label">VISITOR_NAME</label>
+                  <div class="terminal-input-wrap">
+                    <input type="text" name="name" class="t-input" required placeholder="John Doe" autocomplete="name">
+                  </div>
+                </div>
+
+                <div class="terminal-field">
+                  <label class="terminal-label">VISITOR_EMAIL</label>
+                  <div class="terminal-input-wrap">
+                    <input type="email" name="email" class="t-input" required placeholder="john@example.com" autocomplete="email">
+                  </div>
+                </div>
+
+                <div class="terminal-field">
+                  <label class="terminal-label">MESSAGE_BODY</label>
+                  <div class="terminal-input-wrap">
+                    <textarea name="message" class="t-input t-textarea" required placeholder="Let's build something epic..." rows="4"></textarea>
+                  </div>
+                </div>
+
+                <button type="submit" class="terminal-submit-btn">
+                  <span>$ ./submit_message.sh --send</span>
+                </button>
+              </form>
+
+              <!-- MOCK TERMINAL LOGGER -->
+              <div class="terminal-log-box" id="terminal-logs">
+                <div class="log-line">
+                  <span class="log-spinner">⠋</span>
+                  <span>Executing mail server pipeline...</span>
+                </div>
+                <div class="log-line">
+                  <span class="log-spinner">⠙</span>
+                  <span>Payload prepared and encrypted with HTTPS...</span>
+                </div>
+                <div class="log-line" style="display: none;" id="log-sent">
+                  <span class="log-success">[ OK ]</span>
+                  <span>Message delivered to Mayank Joshi! Response code: 200</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-footer">
+            }
+          </div>
+
+          <!-- DIRECT CHIP LINKS -->
+          <div class="contact-pills-row">
+            <a href="mailto:joshimayank646@gmail.com" class="contact-pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pill-icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>joshimayank646@gmail.com</span>
+            </a>
+            <a href="tel:+919354035140" class="contact-pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pill-icon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>+91 9354035140</span>
+            </a>
+            <a href="https://linkedin.com/in/mayank-joshi-a77935220" target="_blank" rel="noopener noreferrer" class="contact-pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pill-icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <span>LinkedIn Profile</span>
+            </a>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <span>&copy; <span id="year">2026</span> Mayank Joshi. Crafted with</span>
+        <span class="heart-icon">&#9829;</span>
+        <span>and Code Editor Theme.</span>
+      </footer>
+
+    </div>
+
+  </div>
+
+  <!-- STATUS BAR FIXED BOTTOM -->
+  <div class="status-bar">
+    <div class="status-left">
+      <div class="status-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg>
+        <span>main*</span>
+      </div>
+      <div class="status-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>0</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>0</span>
+      </div>
+    </div>
+    <div class="status-right">
+      <div class="status-item">
+        <span>Ln 32, Col 8</span>
+      </div>
+      <div class="status-item">
+        <span>Spaces: 2</span>
+      </div>
+      <div class="status-item">
+        <span>UTF-8</span>
+      </div>
+      <div class="status-item">
+        <span>HTML5</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // MOBILE NAVBAR MENU TOGGLE
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const scrim = document.getElementById('scrim');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const tabLinks = document.querySelectorAll('.tab-link');
+    const breadcrumbFile = document.getElementById('breadcrumb-file');
+    const yearSpan = document.getElementById('year');
+
+    // Auto-update copyright year
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    function toggleMenu() {
+      sidebar.classList.toggle('open');
+      scrim.classList.toggle('open');
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      scrim.classList.remove('open');
+    }
+
+    if (hamburger) hamburger.addEventListener('click', toggleMenu);
+    if (scrim) scrim.addEventListener('click', closeMenu);
+
+    // SCROLLSPY & NAVIGATION HIGHLIGHT
+    const sections = document.querySelectorAll('.editor-section');
+    const sectionFileMap = {
+      'about': 'about.md',
+      'experience': 'experience.log',
+      'education': 'education.yml',
+      'projects': 'projects.js',
+      'skills': 'skills.json',
+      'achievements': 'achievements.txt',
+      'contact': 'contact.sh'
+    };
+
+    // Close mobile menu on clicking any navigation link
+    navLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Custom Scrollspy
+    let lastActiveSectionId = '';
+
+    function updateScrollspy() {
+      let currentSectionId = 'about';
+      const scrollPos = window.scrollY + 120; // offset for tab-bar + breadcrumbs
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          currentSectionId = section.getAttribute('id');
+        }
+      });
+
+      if (currentSectionId !== lastActiveSectionId) {
+        lastActiveSectionId = currentSectionId;
+
+        // Update Nav Links
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href').substring(1);
+          if (href === currentSectionId) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+
+        // Update Tabs
+        tabLinks.forEach(tab => {
+          const href = tab.getAttribute('href').substring(1);
+          if (href === currentSectionId) {
+            tab.classList.add('active');
+            // Scroll active tab into view if container overflows
+            tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+          } else {
+            tab.classList.remove('active');
+          }
+        });
+
+        // Update Breadcrumbs
+        if (breadcrumbFile && sectionFileMap[currentSectionId]) {
+          breadcrumbFile.textContent = sectionFileMap[currentSectionId];
+        }
+      }
+    }
+
+    window.addEventListener('scroll', updateScrollspy);
+    updateScrollspy();
+
+    // CONTACT FORM INTERACTIVE LOGGER & REAL FETCH SUBMISSION
+    const contactForm = document.getElementById('contact-form');
+    const logsBox = document.getElementById('terminal-logs');
+    const successLog = document.getElementById('log-sent');
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show terminal panel
+        logsBox.style.display = 'flex';
+        successLog.style.display = 'none';
+        
+        const spinners = logsBox.querySelectorAll('.log-spinner');
+        let spinIndex = 0;
+        const spinChars = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+        
+        // Animate spinners
+        const spinInterval = setInterval(() => {
+          spinIndex = (spinIndex + 1) % spinChars.length;
+          spinbars(spinChars[spinIndex]);
+        }, 100);
+
+        function spinbars(char) {
+          spinners.forEach(spin => {
+            if (spin.parentElement.style.display !== 'none') {
+              spin.textContent = char;
+            }
+          });
+        }
+
+        // Send request via Fetch to Formspree
+        const formData = new FormData(contactForm);
+        fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+        .then(response => {
+          clearInterval(spinInterval);
+          spinners.forEach(s => s.textContent = '[ OK ]');
+          
+          if (response.ok) {
+            successLog.style.display = 'flex';
+            contactForm.reset();
+          } else {
+            // display error in terminal style
+            const errDiv = document.createElement('div');
+            errDiv.className = 'log-line';
+            errDiv.innerHTML = `<span style="color: var(--accent-coral);">[ ERR ]</span> <span>Connection failed with status ${response.status}. Please email directly!</span>`;
+            logsBox.appendChild(errDiv);
+          }
+        })
+        .catch(err => {
+          clearInterval(spinInterval);
+          spinners.forEach(s => s.textContent = '[ ERR ]');
+          const errDiv = document.createElement('div');
+          errDiv.className = 'log-line';
+          errDiv.innerHTML = `<span style="color: var(--accent-coral);">[ ERR ]</span> <span>Network error. Please verify connection and retry.</span>`;
+          logsBox.appendChild(errDiv);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
