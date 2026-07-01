@@ -13,22 +13,6 @@ export default function Projects() {
       github: "https://github.com/MayankJoshi540"
     },
     {
-      filename: "moodroom.js",
-      title: "MoodRoom – Collaborative Space",
-      desc: "Real-time collaborative vibe-space where users study, code, and chill together in ambient, customized environments like rainy nights and lo-fi coffee shops.",
-      tech: ["Next.js", "Socket.io", "Framer Motion", "Tailwind CSS"],
-      live: "https://mood-room-iota.vercel.app/",
-      github: "https://github.com/MayankJoshi540"
-    },
-    {
-      filename: "secrets.js",
-      title: "Secrets App – Anonymous Portal",
-      desc: "A highly secure authentication platform for sharing secrets anonymously. Focuses on sessions, hashing, database storage security, and clean user experience.",
-      tech: ["Node.js", "MongoDB", "Passport.js", "Express"],
-      live: "https://secrets-app-production.up.railway.app/",
-      github: "https://github.com/MayankJoshi540/secrets-app"
-    },
-    {
       filename: "ibuiltthis.ts",
       title: "iBuiltThis – Project Showcase",
       desc: "A modern, responsive platform designed for developers to share and showcase projects. Focused on responsive layouts, clean layouts, and rapid deployments.",
