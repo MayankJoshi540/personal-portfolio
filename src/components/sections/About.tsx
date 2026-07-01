@@ -1,59 +1,90 @@
 "use client";
 
-import AnimatedSection from "../AnimatedSection";
-import { User, Code2, GraduationCap, Award } from "lucide-react";
+import { MapPin, GraduationCap, Code } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6">
-        <AnimatedSection className="mb-16">
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-[1px] bg-brand-accent" />
-            <h2 className="text-sm font-bold uppercase tracking-widest text-brand-accent">Discovery</h2>
+    <section id="about" className="scroll-mt-[60px] md:scroll-mt-[100px] mb-24 pt-4">
+      <div className="font-mono text-sm text-text-dim mb-4 select-none">// about.md</div>
+      
+      <div className="font-mono text-xs md:text-sm mb-8 bg-editor-sidebar/40 border border-editor-border p-4 rounded-xl leading-relaxed max-w-xl">
+        <span className="text-accent-violet font-bold">const</span>{" "}
+        <span className="text-text-high">developer</span> = <span className="text-text-dim">{"{"}</span>
+        <br />
+        &nbsp;&nbsp;name: <span className="text-accent-amber">"Mayank Joshi"</span>,
+        <br />
+        &nbsp;&nbsp;role: <span className="text-accent-amber">"Full Stack Web Developer"</span>,
+        <br />
+        &nbsp;&nbsp;specialty: <span className="text-accent-amber">"MERN Stack &amp; Next.js"</span>
+        <br />
+        <span className="text-text-dim">{"};"}</span>
+      </div>
+
+      <div className="space-y-6">
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-text-high leading-tight tracking-tight max-w-3xl">
+          Engineering web products that are{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-amber via-accent-violet to-accent-teal">
+            functional &amp; beautiful
+          </span>
+          .
+        </h1>
+        
+        <p className="text-base md:text-lg text-text-mid leading-relaxed max-w-2xl">
+          Hi, I'm <strong className="text-text-high font-semibold">Mayank Joshi</strong>. I build immersive, high-performance web experiences. With deep knowledge of the React ecosystem and backend engineering, I transform complex ideas into production-ready software.
+        </p>
+
+        {/* Meta Pills */}
+        <div className="flex flex-wrap gap-3 pt-2">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-editor-panel border border-editor-border text-xs md:text-sm text-text-mid shadow-md">
+            <MapPin className="w-4 h-4 text-accent-teal" />
+            <span>Delhi, India</span>
           </div>
-          <h3 className="text-4xl md:text-6xl font-black tracking-tighter text-white">
-            The Story Behind <br /> the Code.
-          </h3>
-        </AnimatedSection>
-
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          {/* Main Story */}
-          <AnimatedSection delay={0.1} className="md:col-span-8 bg-brand-card/30 border border-white/5 p-8 md:p-12 rounded-[2rem] glass">
-            <User className="w-8 h-8 text-brand-accent mb-6" />
-            <div className="space-y-6 text-brand-muted text-lg leading-relaxed">
-              <p>
-                I am a passionate <strong className="text-white">Full Stack Web Developer</strong> who believes that code is a medium for storytelling and problem-solving.
-              </p>
-              <p>
-                Currently pursuing my B.C.A. (Hons.) at <strong className="text-white">Maharaja Surajmal Institute</strong>, I have spent the last few years immersing myself in the React ecosystem. My journey is fueled by a relentless curiosity and a commitment to mastering the <strong className="text-brand-accent">MERN Stack</strong>.
-              </p>
-              <p>
-                I thrive at the intersection of robust backend logic and pixel-perfect frontend design. Whether I&apos;m architecting database schemas or fine-tuning CSS transitions, my goal is always the same: to create digital experiences that are as functional as they are beautiful.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* Side Stats */}
-          <div className="md:col-span-4 grid grid-cols-1 gap-6">
-            <AnimatedSection delay={0.2} className="bg-brand-primary/10 border border-brand-primary/20 p-8 rounded-[2rem] flex flex-col justify-center items-center text-center">
-              <GraduationCap className="w-8 h-8 text-brand-primary mb-4" />
-              <h4 className="text-3xl font-black text-white">2025</h4>
-              <p className="text-sm text-brand-muted uppercase tracking-tighter">Graduation</p>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.3} className="bg-brand-secondary/10 border border-brand-secondary/20 p-8 rounded-[2rem] flex flex-col justify-center items-center text-center">
-              <Code2 className="w-8 h-8 text-brand-secondary mb-4" />
-              <h4 className="text-3xl font-black text-white">10+</h4>
-              <p className="text-sm text-brand-muted uppercase tracking-tighter">Large Scale Projects</p>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.4} className="bg-brand-accent/10 border border-brand-accent/20 p-8 rounded-[2rem] flex flex-col justify-center items-center text-center">
-              <Award className="w-8 h-8 text-brand-accent mb-4" />
-              <h4 className="text-3xl font-black text-white">MERN</h4>
-              <p className="text-sm text-brand-muted uppercase tracking-tighter">Specialist</p>
-            </AnimatedSection>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-editor-panel border border-editor-border text-xs md:text-sm text-text-mid shadow-md">
+            <GraduationCap className="w-4 h-4 text-accent-teal" />
+            <span>BCA (Hons.) Student</span>
           </div>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-editor-panel border border-editor-border text-xs md:text-sm text-text-mid shadow-md">
+            <Code className="w-4 h-4 text-accent-teal" />
+            <span>Full Stack / MERN</span>
+          </div>
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap gap-4 pt-6">
+          <a 
+            href="#contact" 
+            className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-accent-amber hover:bg-[#ffd27a] text-editor-sidebar font-semibold text-sm md:text-base transition-all duration-150 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent-amber/10"
+          >
+            <span>Contact Me</span>
+            <svg 
+              className="w-4 h-4 group-hover:translate-x-1 transition-transform" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor" 
+              strokeWidth="2.5"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a 
+            href="/resume.pdf" 
+            download
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-editor-border bg-transparent hover:bg-editor-panel text-text-high font-semibold text-sm md:text-base transition-all duration-150 hover:-translate-y-0.5"
+          >
+            <span>Download Resume</span>
+            <svg 
+              className="w-4 h-4" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor" 
+              strokeWidth="2.5"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </a>
         </div>
       </div>
     </section>

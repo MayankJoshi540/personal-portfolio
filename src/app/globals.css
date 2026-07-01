@@ -1,22 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-dark: #0B0B1A;
-  --color-brand-card: #16162D;
-  --color-brand-primary: #6B21A8; /* Deep Purple */
-  --color-brand-secondary: #4F46E5; /* Indigo */
-  --color-brand-accent: #A855F7; /* Bright Purple */
-  --color-brand-text: #F1F5F9;
-  --color-brand-muted: #94A3B8;
+  --color-brand-dark: #10121a;
+  --color-brand-card: #191c27;
+  --color-brand-primary: #8b85ff;
+  --color-brand-secondary: #5eead4;
+  --color-brand-accent: #ffb454;
+  --color-brand-text: #f2f1f8;
+  --color-brand-muted: #a8abc4;
+  
+  --color-editor-bg: #10121a;
+  --color-editor-sidebar: #0c0d13;
+  --color-editor-activity: #08090d;
+  --color-editor-panel: #191c27;
+  --color-editor-panel-alt: #1f2330;
+  --color-editor-border: #2b2f42;
+  --color-editor-border-soft: #222634;
+  --color-text-high: #f2f1f8;
+  --color-text-mid: #a8abc4;
+  --color-text-dim: #6b6e88;
+  --color-accent-amber: #ffb454;
+  --color-accent-teal: #5eead4;
+  --color-accent-coral: #ff6b6b;
+  --color-accent-violet: #8b85ff;
   
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 :root {
-  --background: #0B0B1A;
-  --foreground: #F1F5F9;
-  --brand-purple: #6B21A8;
+  --background: #10121a;
+  --foreground: #f2f1f8;
+  --brand-purple: #8b85ff;
   --brand-indigo: #4F46E5;
 }
 
