@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+:root {
+  --spotlight-color: rgba(139, 133, 255, 0.04);
+}
+
 @theme {
   --color-brand-dark: #10121a;
   --color-brand-card: #191c27;
@@ -110,4 +114,78 @@ html.lenis {
 
 .bg-glow-indigo {
   background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, rgba(11, 11, 26, 0) 70%);
+}
+
+/* CUSTOM IDE COLOR THEMES */
+.theme-dracula {
+  --color-editor-bg: #282a36;
+  --color-editor-sidebar: #191a21;
+  --color-editor-activity: #21222c;
+  --color-editor-panel: #282a36;
+  --color-editor-panel-alt: #44475a;
+  --color-editor-border: #44475a;
+  --color-editor-border-soft: #343746;
+  --color-text-high: #f8f8f2;
+  --color-text-mid: #8be9fd;
+  --color-text-dim: #6272a4;
+  --color-accent-amber: #ffb86c;
+  --color-accent-teal: #50fa7b;
+  --color-accent-coral: #ff5555;
+  --color-accent-violet: #bd93f9;
+  
+  --background: #282a36;
+  --foreground: #f8f8f2;
+  --spotlight-color: rgba(189, 147, 249, 0.05);
+}
+
+.theme-synthwave {
+  --color-editor-bg: #262335;
+  --color-editor-sidebar: #241b2f;
+  --color-editor-activity: #201a24;
+  --color-editor-panel: #2b213a;
+  --color-editor-panel-alt: #372948;
+  --color-editor-border: #fe445050;
+  --color-editor-border-soft: #fe445015;
+  --color-text-high: #ffffff;
+  --color-text-mid: #f92aad;
+  --color-text-dim: #685e79;
+  --color-accent-amber: #fede5d;
+  --color-accent-teal: #2fe2f9;
+  --color-accent-coral: #fe4450;
+  --color-accent-violet: #f97e72;
+  
+  --background: #262335;
+  --foreground: #ffffff;
+  --spotlight-color: rgba(249, 42, 173, 0.06);
+}
+
+.theme-monokai {
+  --color-editor-bg: #272822;
+  --color-editor-sidebar: #1e1f1c;
+  --color-editor-activity: #141411;
+  --color-editor-panel: #272822;
+  --color-editor-panel-alt: #3e3d32;
+  --color-editor-border: #3e3d32;
+  --color-editor-border-soft: #2f2e25;
+  --color-text-high: #f8f8f2;
+  --color-text-mid: #f92672;
+  --color-text-dim: #75715e;
+  --color-accent-amber: #e6db74;
+  --color-accent-teal: #a6e22e;
+  --color-accent-coral: #f92672;
+  --color-accent-violet: #ae81ff;
+  
+  --background: #272822;
+  --foreground: #f8f8f2;
+  --spotlight-color: rgba(166, 226, 46, 0.05);
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }

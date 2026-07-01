@@ -61,7 +61,7 @@ export default function Experience() {
         {experiences.map((exp, idx) => (
           <div key={idx} className="relative mb-10 last:mb-0 group">
             {/* Git node dot */}
-            <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-editor-bg border-2 border-accent-violet flex items-center justify-center z-10">
+            <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-editor-bg border-2 border-accent-violet flex items-center justify-center z-10 transition-all duration-150 group-hover:border-accent-teal group-hover:shadow-[0_0_8px_#5eead4]">
               <div className="w-1.5 h-1.5 rounded-full bg-accent-violet group-hover:bg-accent-teal group-hover:scale-130 transition-all duration-150"></div>
             </div>
             
@@ -75,7 +75,7 @@ export default function Experience() {
               
               <div className="bg-editor-sidebar border border-editor-border rounded-lg p-4 font-mono text-xs overflow-x-auto leading-relaxed">
                 {exp.diffs.map((diff, dIdx) => (
-                  <div key={dIdx} className="text-[#a6e22e] whitespace-pre-wrap mb-1 last:mb-0">
+                  <div key={dIdx} className="text-[#a6e22e] whitespace-pre-wrap py-0.5 px-1.5 -mx-1.5 rounded hover:bg-[#a6e22e]/10 transition-colors duration-100">
                     + {diff}
                   </div>
                 ))}

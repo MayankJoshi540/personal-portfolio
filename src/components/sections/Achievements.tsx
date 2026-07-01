@@ -30,10 +30,13 @@ export default function Achievements() {
 
       <div className="bg-editor-panel border border-editor-border rounded-2xl p-6 md:p-8 font-mono text-sm shadow-xl space-y-4">
         {achievements.map((ach, idx) => (
-          <div key={idx} className="flex items-start">
-            <span className="text-accent-teal font-extrabold mr-3 select-none">[x]</span>
+          <div 
+            key={idx} 
+            className="flex items-start p-2.5 -mx-2.5 rounded-lg hover:bg-editor-panel-alt/40 border border-transparent hover:border-editor-border/40 transition-all duration-150 group"
+          >
+            <span className="text-accent-teal font-extrabold mr-3 select-none group-hover:text-accent-amber transition-colors">[x]</span>
             <div 
-              className="text-text-mid font-sans text-sm md:text-base leading-relaxed"
+              className="text-text-mid font-sans text-sm md:text-base leading-relaxed group-hover:text-text-high transition-colors"
               dangerouslySetInnerHTML={{ __html: ach.text }}
             />
           </div>
