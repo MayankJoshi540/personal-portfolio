@@ -9,16 +9,16 @@ export default function Projects() {
       title: "PrepWiseAi – AI Interview platform",
       desc: "A full-stack platform generating mock interviews and real-time structured feedback based on skills and roles. Uses Gemini AI to power custom questions and grading.",
       tech: ["Next.js", "TypeScript", "Tailwind CSS", "Clerk", "Gemini AI"],
-      live: "#",
-      github: "https://github.com/MayankJoshi540"
+      live: "https://preppwisee.vercel.app",
+      github: "https://github.com/MayankJoshi540/PrepWise-AI"
     },
     {
       filename: "ibuiltthis.ts",
       title: "iBuiltThis – Project Showcase",
       desc: "A modern, responsive platform designed for developers to share and showcase projects. Focused on responsive layouts, clean layouts, and rapid deployments.",
       tech: ["Next.js", "React", "Tailwind CSS", "Vercel"],
-      live: "#",
-      github: "https://github.com/MayankJoshi540"
+      live: "https://i-built-this-five.vercel.app/",
+      github: "https://github.com/MayankJoshi540/iBuiltThis"
     }
   ];
 
