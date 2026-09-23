@@ -28,7 +28,7 @@ export default function Navbar() {
         <div className={`flex items-center justify-between px-6 py-3 rounded-full border border-white/10 glass ${
           scrolled ? "bg-brand-dark/80" : "bg-transparent border-transparent backdrop-blur-0"
         }`}>
-          <Link href="/" className="text-xl font-bold tracking-tighter text-white">
+          <Link href="/" className="text-2xl font-bold tracking-tighter text-white">
             MJ<span className="text-brand-accent">.</span>
           </Link>
 
@@ -37,7 +37,7 @@ export default function Navbar() {
               <Link
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="text-sm font-medium text-brand-muted hover:text-white transition-colors"
+                className="text-lg font-medium text-brand-muted hover:text-white transition-colors"
               >
                 {item}
               </Link>
@@ -47,7 +47,7 @@ export default function Navbar() {
           <MagneticButton>
             <Link
               href="#contact"
-              className="px-5 py-2 rounded-full bg-brand-primary text-white text-sm font-bold shadow-lg shadow-brand-primary/20 hover:bg-brand-accent transition-colors"
+              className="px-6 py-2.5 rounded-full bg-brand-primary text-white text-lg font-bold shadow-lg shadow-brand-primary/20 hover:bg-brand-accent transition-colors"
             >
               Hire Me
             </Link>
