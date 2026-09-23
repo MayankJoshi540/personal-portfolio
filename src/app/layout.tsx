@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Mayank Joshi | Full Stack Developer",
-  description: "Portfolio of Mayank Joshi, a passionate Full Stack Developer specializing in the MERN Stack and modern web technologies.",
+  description: "Portfolio of Mayank Joshi, Full Stack Developer specializing in React, Next.js, NestJS, WebRTC, real-time architectures, and scalable web applications.",
 };
 
 export default function RootLayout({
@@ -25,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}>
-      <body className="bg-brand-dark text-brand-text antialiased">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <body className="bg-brand-dark text-brand-text antialiased" suppressHydrationWarning>
         <div className="noise-bg" />
         <CustomCursor />
         <SmoothScroll>
