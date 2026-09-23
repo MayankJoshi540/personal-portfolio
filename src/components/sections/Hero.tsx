@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import MagneticButton from "../MagneticButton";
 import { ArrowRight, Download } from "lucide-react";
 
-const words = ["Creative Developer", "MERN Specialist", "UI/UX Enthusiast", "Problem Solver"];
+const words = ["Full Stack Developer", "NestJS & React Specialist", "Real-Time Systems", "Problem Solver"];
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
@@ -19,21 +19,7 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Glows */}
-      <div className="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-brand-primary/20 rounded-full blur-[120px] -z-10 animate-pulse" />
-      <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-brand-secondary/20 rounded-full blur-[120px] -z-10 animate-pulse" style={{ animationDelay: "2s" }} />
-
       <div className="max-w-5xl mx-auto px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-white/10 glass-glow mb-8"
-        >
-          <span className="w-2 h-2 rounded-full bg-green-800 animate-ping" />
-          <span className="text-xs font-medium text-brand-text/80 tracking-wide uppercase">Available for work</span>
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -49,7 +35,7 @@ export default function Hero() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -50, opacity: 0 }}
                 transition={{ duration: 0.5, ease: "circOut" }}
-                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-brand-accent to-brand-secondary"
+                className="inline-block text-accent-teal"
               >
                 {words[index]}
               </motion.span>
@@ -61,9 +47,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="max-w-2xl mx-auto text-lg md:text-xl text-brand-muted leading-relaxed mb-12"
+          className="max-w-2xl mx-auto text-xl md:text-2xl text-brand-muted leading-relaxed mb-12"
         >
-          Hi, I&apos;m <span className="text-white font-semibold">Mayank Joshi</span>. I build immersive, high-performance web experiences with the <span className="text-brand-accent">MERN Stack</span>. Transforming complex ideas into pixel-perfect reality.
+          Hi, I&apos;m <span className="text-white font-semibold">Mayank Joshi</span>. I build high-performance web applications and real-time backend systems. Transforming complex ideas into production-ready reality.
         </motion.p>
 
         <motion.div
@@ -75,10 +61,10 @@ export default function Hero() {
           <MagneticButton>
             <a
               href="#projects"
-              className="group flex items-center space-x-2 px-8 py-4 bg-white text-brand-dark rounded-2xl font-bold transition-transform hover:scale-105"
+              className="group flex items-center space-x-2 px-8 py-4 bg-white text-brand-dark rounded-2xl font-bold text-lg transition-transform hover:scale-105"
             >
               <span>View My Work</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
           </MagneticButton>
 
@@ -86,9 +72,9 @@ export default function Hero() {
             <a
               href="/resume.pdf"
               download
-              className="flex items-center space-x-2 px-8 py-4 bg-brand-card border border-white/10 rounded-2xl font-bold text-white hover:bg-brand-card/80 transition-all"
+              className="flex items-center space-x-2 px-8 py-4 bg-brand-card border border-white/10 rounded-2xl font-bold text-lg text-white hover:bg-brand-card/80 transition-all"
             >
-              <Download className="w-4 h-4" />
+              <Download className="w-5 h-5" />
               <span>Resume</span>
             </a>
           </MagneticButton>
@@ -102,8 +88,8 @@ export default function Hero() {
         transition={{ delay: 1, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2"
       >
-        <span className="text-[10px] uppercase tracking-widest text-brand-muted">Scroll</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-brand-accent to-transparent" />
+        <span className="text-xs uppercase tracking-widest text-brand-muted">Scroll</span>
+        <div className="w-[1px] h-12 bg-white/20" />
       </motion.div>
     </section>
   );
