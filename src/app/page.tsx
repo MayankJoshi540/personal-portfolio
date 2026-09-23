@@ -117,41 +117,43 @@ export default function Home() {
           if (arg === "about.md") {
             newHistory.push(
               "# Mayank Joshi",
-              "Full Stack Web Developer & BCA Hons Student.",
-              "Building MERN and Next.js applications, optimizing systems, and working on interactive web structures."
+              "Full Stack Developer & BCA (Honours) Student.",
+              "Building real-time video platforms, scalable REST APIs, and modern web applications with React, Next.js, and NestJS."
             );
           } else if (arg === "skills.json") {
             newHistory.push(
               "{",
-              '  "languages": ["JavaScript", "TypeScript", "C++", "C", "Java", "SQL"],',
-              '  "frontend": ["React", "Next.js", "Redux", "Tailwind CSS"],',
-              '  "backend": ["Node.js", "Express.js", "MongoDB"]',
+              '  "languages": ["JavaScript", "TypeScript", "C++", "C", "Java", "SQL", "HTML", "CSS"],',
+              '  "frontend": ["React.js", "Next.js", "Tailwind CSS", "Bootstrap", "jQuery"],',
+              '  "backend": ["Node.js", "Express.js", "NestJS", "REST APIs", "Clerk Authentication"],',
+              '  "databases": ["MongoDB", "Mongoose", "PostgreSQL", "Supabase", "MariaDB"],',
+              '  "tools": ["Git", "GitHub", "VS Code", "Vercel", "Netlify", "Render", "WordPress"]',
               "}"
             );
           } else if (arg === "education.yml") {
             newHistory.push(
-              "degree: BCA Hons (3rd year)",
-              "college: Maharaja Surajmal Institute",
-              "location: Janakpuri, New Delhi"
+              "degree: Bachelor of Computer Applications (Honours) [2024-2028]",
+              "college: Maharaja Surajmal Institute (GGSIPU), New Delhi",
+              "senior_secondary: Commerce with Mathematics (93% Best Four Subjects)"
             );
           } else if (arg === "experience.log") {
             newHistory.push(
-              "- Intern Developer @ Global Education Talent (2026)",
-              "- Tech Team Member @ MSI Tech Society (2024-Present)",
-              "- Freelance Web Developer (2025)"
+              "- Full Stack Web Developer Intern @ C-Zentrix (Aug 2026-Nov 2026)",
+              "- Full Stack Developer Intern @ Global Education Talent (Jan 2026-Mar 2026)"
             );
           } else if (arg === "projects.js") {
             newHistory.push(
               "const projects = [",
-              "  { name: 'PrepWiseAi', type: 'AI Interview prep' },",
-              "  { name: 'iBuiltThis', type: 'Project showcase' }",
+              "  { name: 'PrepWise AI', type: 'AI Mock Interview Platform (Gemini AI, Clerk, Next.js)' },",
+              "  { name: 'APIRun', type: 'Backend Engineering & API Challenges Platform' }",
               "];"
             );
           } else if (arg === "achievements.txt") {
             newHistory.push(
-              "- BCA 3rd Year Academic Honoree",
-              "- DSA Solver on LeetCode (C++)",
-              "- 3+ Production-Grade MERN/NextJS Applications deployed"
+              "- Full Stack Developer Intern @ C-Zentrix (Real-Time WebRTC & AI Video Platform)",
+              "- Built & Deployed PrepWise AI & APIRun",
+              "- BCA (Honours) Student @ Maharaja Surajmal Institute (GGSIPU)",
+              "- Active DSA & Problem Solver on LeetCode"
             );
           } else if (arg === "contact.sh") {
             newHistory.push(
@@ -451,34 +453,19 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-editor-bg select-text text-text-mid overflow-hidden">
+    <div className="relative min-h-screen flex flex-col bg-editor-bg select-text text-text-mid overflow-x-clip">
       
-      {/* Background Decorative Glow Grid */}
-      <div className="fixed inset-0 pointer-events-none z-[-10] opacity-25" 
+      {/* Background Grid */}
+      <div className="fixed inset-0 pointer-events-none z-[-10] opacity-20" 
            style={{
              backgroundImage: "linear-gradient(to right, #222634 1px, transparent 1px), linear-gradient(to bottom, #222634 1px, transparent 1px)",
              backgroundSize: "24px 24px"
            }}
       />
-      <div className="fixed top-[-10%] left-[10%] w-[600px] h-[600px] rounded-full pointer-events-none z-[-9] blur-[120px]"
-           style={{ background: "radial-gradient(circle, rgba(139, 133, 255, 0.08) 0%, rgba(16, 18, 26, 0) 70%)" }}
-      />
-      <div className="fixed bottom-[-10%] right-[10%] w-[700px] h-[700px] rounded-full pointer-events-none z-[-9] blur-[120px]"
-           style={{ background: "radial-gradient(circle, rgba(94, 234, 212, 0.06) 0%, rgba(16, 18, 26, 0) 70%)" }}
-      />
-      {/* Dynamic Cursor Spotlight (Desktop Only) */}
-      <div 
-        className="fixed pointer-events-none z-[-8] opacity-100 hidden md:block w-[600px] h-[600px] rounded-full blur-[100px] transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300"
-        style={{
-          left: `${mousePos.x}px`,
-          top: `${mousePos.y}px`,
-          background: `radial-gradient(circle, var(--spotlight-color, rgba(139, 133, 255, 0.04)) 0%, transparent 70%)`
-        }}
-      />
 
       {/* 1. IDE TOP WINDOW CONTROLS BAR (Desktop Only) */}
-      <div className="h-[35px] bg-editor-activity border-b border-editor-border fixed top-0 left-0 right-0 z-50 hidden md:flex justify-between items-center px-4 select-none">
-        <div className="flex items-center gap-4 text-xs font-mono text-text-dim">
+      <div className="h-[35px] bg-editor-activity border-b border-editor-border fixed top-0 left-0 right-0 z-50 hidden md:flex justify-between items-center px-4 select-none overflow-hidden">
+        <div className="flex items-center gap-4 text-xs font-mono text-text-dim flex-shrink-0">
           <svg className="w-4 h-4 text-accent-violet flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
             <polygon points="5 3 19 12 5 21 5 3"/>
           </svg>
@@ -539,7 +526,7 @@ export default function Home() {
           }`}
         >
           {/* Activity Bar */}
-          <div className="w-[48px] bg-editor-activity border-r border-editor-border flex flex-col justify-between items-center py-4 select-none">
+          <div className="w-[48px] bg-editor-activity border-r border-editor-border flex flex-col justify-between items-center py-4 select-none flex-shrink-0">
             <div className="flex flex-col items-center gap-5 w-full">
               <div className="w-full py-1 text-accent-violet border-l-2 border-accent-violet flex justify-center cursor-default">
                 <Folder className="w-5.5 h-5.5" />
@@ -576,30 +563,30 @@ export default function Home() {
           </div>
 
           {/* File Explorer Tree */}
-          <div className="flex-1 flex flex-col justify-between h-full py-3 select-none">
+          <div className="flex-1 flex flex-col justify-between h-full py-3 select-none min-w-0">
             <div>
               <div className="font-mono text-[10px] font-bold text-text-dim tracking-wider uppercase px-5 mb-3">
                 Explorer
               </div>
               
-              <div className="flex items-center gap-1.5 px-5 py-2 text-text-mid font-mono text-[11px] font-bold">
-                <ChevronDown className="w-3.5 h-3.5" />
-                <span>PORTFOLIO [WORKSPACE]</span>
+              <div className="flex items-center gap-2 px-5 py-2 text-text-high font-sans font-extrabold text-sm tracking-wider uppercase">
+                <ChevronDown className="w-4 h-4 text-accent-amber flex-shrink-0" />
+                <span className="truncate">PORTFOLIO [WORKSPACE]</span>
               </div>
 
-              <ul className="flex flex-col">
+              <ul className="flex flex-col gap-0.5">
                 {sectionsList.map((sec) => (
                   <li key={sec.id}>
                     <button 
                       onClick={() => handleScrollTo(sec.id)}
-                      className={`w-full flex items-center gap-2.5 px-7 py-1.5 text-left font-mono text-[13px] border-l-2 cursor-pointer transition-all duration-150 ${
+                      className={`w-full flex items-center gap-3 px-6 py-2 text-left font-sans text-sm md:text-[15px] font-bold border-l-2 cursor-pointer transition-all duration-150 ${
                         activeSection === sec.id 
                           ? "bg-editor-panel-alt text-text-high border-accent-amber" 
-                          : "border-transparent text-text-dim hover:text-text-high hover:bg-editor-panel"
+                          : "border-transparent text-text-mid hover:text-text-high hover:bg-editor-panel"
                       }`}
                     >
-                      {renderFileIcon(sec.icon)}
-                      <span>{sec.file}</span>
+                      {renderFileIcon(sec.icon, 16)}
+                      <span className="truncate">{sec.file}</span>
                     </button>
                   </li>
                 ))}
@@ -609,17 +596,13 @@ export default function Home() {
             {/* Profile Summary Card at bottom */}
             <div className="border-t border-editor-border p-4 bg-editor-sidebar/50">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-violet to-accent-teal border border-editor-border flex items-center justify-center text-text-high font-mono font-bold text-sm shadow">
+                <div className="w-10 h-10 rounded-full bg-editor-panel-alt border border-editor-border flex items-center justify-center text-accent-teal font-mono font-bold text-sm shadow flex-shrink-0">
                   MJ
                 </div>
                 <div className="min-w-0">
                   <div className="text-text-high font-semibold text-xs md:text-sm truncate">Mayank Joshi</div>
                   <div className="text-text-dim text-[10px] font-mono truncate">Full Stack Developer</div>
                 </div>
-              </div>
-              <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-accent-teal/5 border border-accent-teal/15 text-[10px] text-accent-teal font-mono w-max">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-teal shadow-[0_0_8px_#5eead4] animate-pulse"></span>
-                <span>Available for work</span>
               </div>
               <div className="flex gap-2 mt-3.5">
                 <a 
@@ -660,20 +643,20 @@ export default function Home() {
         }`}>
           
           {/* STICKY TAB BAR */}
-          <div className="h-[38px] bg-editor-sidebar border-b border-editor-border flex overflow-x-auto scrollbar-none sticky top-[48px] md:top-[35px] z-30 select-none">
+          <div className="h-[40px] bg-editor-sidebar border-b border-editor-border flex overflow-x-auto scrollbar-none sticky top-[48px] md:top-[35px] z-30 select-none max-w-full">
             {sectionsList.map((sec) => (
               <button 
                 key={sec.id}
                 onClick={() => handleScrollTo(sec.id)}
-                className={`h-full px-5 flex items-center gap-2 border-r border-editor-border font-mono text-[13px] relative cursor-pointer whitespace-nowrap transition-colors duration-150 ${
+                className={`h-full px-4 sm:px-5 flex items-center gap-2 border-r border-editor-border font-sans text-xs sm:text-sm font-bold relative cursor-pointer whitespace-nowrap transition-colors duration-150 flex-shrink-0 ${
                   activeSection === sec.id 
-                    ? "bg-editor-bg text-text-high font-medium" 
+                    ? "bg-editor-bg text-text-high font-bold" 
                     : "bg-editor-sidebar text-text-dim hover:bg-editor-panel/50 hover:text-text-mid"
                 }`}
               >
-                {renderFileIcon(sec.icon, 12)}
+                {renderFileIcon(sec.icon, 14)}
                 <span>{sec.file}</span>
-                <span className="text-[9px] text-text-dim opacity-0 group-hover:opacity-100 hover:text-accent-coral ml-1 select-none">&times;</span>
+                <span className="text-[10px] text-text-dim opacity-0 group-hover:opacity-100 hover:text-accent-coral ml-1 select-none">&times;</span>
                 {activeSection === sec.id && (
                   <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent-amber" />
                 )}
@@ -682,8 +665,8 @@ export default function Home() {
           </div>
 
           {/* BREADCRUMBS PATH */}
-          <div className="h-[24px] bg-editor-bg border-b border-editor-border-soft flex items-center px-6 font-mono text-[11px] text-text-dim select-none">
-            <div className="flex items-center gap-1.5">
+          <div className="h-[24px] bg-editor-bg border-b border-editor-border-soft flex items-center px-4 sm:px-6 font-mono text-[11px] text-text-dim select-none overflow-x-auto scrollbar-none max-w-full">
+            <div className="flex items-center gap-1.5 whitespace-nowrap">
               <span>mayank-joshi</span>
               <span className="opacity-50">&gt;</span>
               <span>src</span>
@@ -695,7 +678,7 @@ export default function Home() {
           </div>
 
           {/* EDITOR BODY SECTIONS */}
-          <div className="px-6 md:px-14 py-8 max-w-[860px] mx-auto">
+          <div className="px-4 sm:px-6 md:px-8 lg:px-12 py-8 max-w-[900px] w-full mx-auto min-w-0">
             <About />
             <Experience />
             <Education />
@@ -705,9 +688,9 @@ export default function Home() {
             <Contact />
 
             {/* FOOTER */}
-            <footer className="border-t border-editor-border mt-16 pt-8 pb-12 flex justify-center items-center gap-1.5 font-mono text-xs text-text-dim select-none">
+            <footer className="border-t border-editor-border mt-16 pt-8 pb-12 flex justify-center items-center gap-1.5 font-mono text-xs text-text-dim select-none flex-wrap text-center">
               <span>&copy; {currentYear} Mayank Joshi. Crafted with</span>
-              <Heart className="w-3.5 h-3.5 text-accent-coral fill-accent-coral animate-pulse" />
+              <Heart className="w-3.5 h-3.5 text-accent-coral fill-accent-coral animate-pulse flex-shrink-0" />
               <span>and VS Code theme.</span>
             </footer>
           </div>
@@ -715,8 +698,8 @@ export default function Home() {
       </div>
 
       {/* 5. FIXED STATUS BAR (Bottom) */}
-      <div className="h-[22px] bg-accent-violet fixed bottom-0 left-0 right-0 z-50 flex justify-between items-center px-4 font-mono text-[11px] text-editor-activity font-semibold select-none">
-        <div className="flex items-center gap-3.5">
+      <div className="h-[22px] bg-accent-violet fixed bottom-0 left-0 right-0 z-50 flex justify-between items-center px-4 font-mono text-[11px] text-editor-activity font-semibold select-none overflow-hidden">
+        <div className="flex items-center gap-3.5 flex-shrink-0">
           <button 
             onClick={() => setIsTerminalOpen(prev => !prev)}
             className="flex items-center gap-1.5 hover:text-text-high transition-colors cursor-pointer mr-2 bg-transparent border-none font-mono text-[11px] text-editor-activity font-semibold"
@@ -768,30 +751,30 @@ export default function Home() {
                     key={idx}
                     onClick={item.action}
                     onMouseEnter={() => setSelectedIndex(idx)}
-                    className={`w-full text-left font-mono text-xs md:text-sm px-4 py-2.5 flex items-center gap-3 transition-colors ${
+                    className={`w-full text-left font-mono text-base md:text-lg px-4 py-3 flex items-center gap-3 transition-colors ${
                       selectedIndex === idx 
                         ? "bg-editor-panel-alt text-text-high" 
                         : "text-text-dim hover:text-text-high"
                     }`}
                   >
                     {item.type === "file" ? (
-                      <span className="flex-shrink-0">{renderFileIcon(item.icon || "txt", 14)}</span>
+                      <span className="flex-shrink-0">{renderFileIcon(item.icon || "txt", 16)}</span>
                     ) : item.type === "theme" ? (
-                      <svg className="w-4 h-4 text-accent-violet flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/></svg>
+                      <svg className="w-5 h-5 text-accent-violet flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/></svg>
                     ) : (
-                      <svg className="w-4 h-4 text-accent-teal flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                      <svg className="w-5 h-5 text-accent-teal flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
                     )}
                     <span className="truncate">{item.name}</span>
                   </button>
                 ))
               ) : (
-                <div className="text-center font-mono text-xs text-text-dim py-8">
+                <div className="text-center font-mono text-base text-text-dim py-8">
                   No matching files or commands found.
                 </div>
               )}
             </div>
             
-            <div className="h-8 bg-editor-activity border-t border-editor-border flex items-center justify-between px-4 text-[10px] text-text-dim font-mono">
+            <div className="h-9 bg-editor-activity border-t border-editor-border flex items-center justify-between px-4 text-xs text-text-dim font-mono">
               <span>Use ↑↓ keys, ↵ to run</span>
               <span>ESC to close</span>
             </div>
@@ -800,10 +783,10 @@ export default function Home() {
       )}
       {/* 7. DESKTOP TOAST NOTIFICATION (Ctrl + P Tip) */}
       {showToast && (
-        <div className="fixed bottom-10 right-6 bg-editor-panel border border-editor-border rounded-lg shadow-2xl p-4 max-w-sm flex gap-3.5 z-40 animate-[slideIn_0.3s_ease-out] select-none font-mono text-xs hidden md:flex">
+        <div className="fixed bottom-10 right-6 bg-editor-panel border border-editor-border rounded-lg shadow-2xl p-5 max-w-sm flex gap-3.5 z-40 animate-[slideIn_0.3s_ease-out] select-none font-mono text-base hidden md:flex">
           {/* Info icon */}
           <div className="text-accent-violet mt-0.5 flex-shrink-0">
-            <svg className="w-5.5 h-5.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="16" x2="12" y2="12" />
               <line x1="12" y1="8" x2="12.01" y2="8" />
@@ -824,13 +807,13 @@ export default function Home() {
                   setSelectedIndex(0);
                   setShowToast(false);
                 }}
-                className="px-3 py-1 bg-accent-violet hover:bg-[#a19cff] text-editor-sidebar rounded font-semibold transition-colors cursor-pointer"
+                className="px-3.5 py-1.5 bg-accent-violet hover:bg-[#a19cff] text-editor-sidebar rounded font-semibold transition-colors cursor-pointer"
               >
                 Open Palette
               </button>
               <button 
                 onClick={() => setShowToast(false)}
-                className="px-3 py-1 border border-editor-border hover:bg-editor-panel-alt text-text-high rounded transition-colors cursor-pointer"
+                className="px-3.5 py-1.5 border border-editor-border hover:bg-editor-panel-alt text-text-high rounded transition-colors cursor-pointer"
               >
                 Dismiss
               </button>
@@ -843,7 +826,7 @@ export default function Home() {
             className="text-text-dim hover:text-text-high cursor-pointer self-start"
             aria-label="Close Toast"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5" />
           </button>
         </div>
       )}
@@ -851,13 +834,13 @@ export default function Home() {
       {/* 8. COLLAPSIBLE BOTTOM IDE PANEL (Terminal) */}
       {isTerminalOpen && (
         <div 
-          className={`fixed bottom-[22px] left-0 right-0 h-[240px] bg-editor-sidebar border-t border-editor-border z-30 flex flex-col font-mono select-none transition-all duration-300 ${
+          className={`fixed bottom-[28px] left-0 right-0 h-[280px] bg-editor-sidebar border-t border-editor-border z-30 flex flex-col font-mono select-none transition-all duration-300 ${
             isSidebarCollapsed ? "md:left-0" : "md:left-[288px]"
           }`}
         >
           {/* Top Bar Tabs */}
-          <div className="h-8 bg-editor-activity border-b border-editor-border flex items-center justify-between px-4 text-xs">
-            <div className="flex items-center gap-4 h-full">
+          <div className="h-9 bg-editor-activity border-b border-editor-border flex items-center justify-between px-4 text-sm">
+            <div className="flex items-center gap-5 h-full">
               <span className="text-text-dim cursor-default hover:text-text-high py-2 border-b-2 border-transparent">PROBLEMS</span>
               <span className="text-text-dim cursor-default hover:text-text-high py-2 border-b-2 border-transparent">OUTPUT</span>
               <span className="text-text-dim cursor-default hover:text-text-high py-2 border-b-2 border-transparent">DEBUG CONSOLE</span>
@@ -868,31 +851,31 @@ export default function Home() {
               className="text-text-dim hover:text-text-high cursor-pointer p-1"
               aria-label="Close Terminal"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Terminal Console Area */}
           <div 
             onClick={() => terminalInputRef.current?.focus()}
-            className="flex-grow p-4 overflow-y-auto text-xs md:text-sm text-text-mid flex flex-col cursor-text select-text"
+            className="flex-grow p-4 overflow-y-auto text-base md:text-lg text-text-mid flex flex-col cursor-text select-text"
           >
             {terminalHistory.map((line, idx) => (
-              <div key={idx} className="whitespace-pre-wrap leading-relaxed min-h-[1.2rem]">
+              <div key={idx} className="whitespace-pre-wrap leading-relaxed min-h-[1.4rem]">
                 {line}
               </div>
             ))}
             <div ref={terminalBottomRef} />
             
             {/* Input Line */}
-            <form onSubmit={handleTerminalSubmit} className="flex items-center gap-1.5 mt-1 text-text-high flex-shrink-0">
-              <span className="text-accent-teal font-semibold flex-shrink-0">C:\Users\mayank\portfolio&gt;</span>
+            <form onSubmit={handleTerminalSubmit} className="flex items-center gap-2 mt-2 text-text-high flex-shrink-0">
+              <span className="text-accent-teal font-semibold flex-shrink-0 text-base md:text-lg">C:\Users\mayank\portfolio&gt;</span>
               <input 
                 ref={terminalInputRef}
                 type="text" 
                 value={terminalInput}
                 onChange={(e) => setTerminalInput(e.target.value)}
-                className="flex-1 bg-transparent border-none outline-none font-mono text-xs md:text-sm text-text-high"
+                className="flex-1 bg-transparent border-none outline-none font-mono text-base md:text-lg text-text-high"
                 autoComplete="off"
                 autoCorrect="off"
                 autoCapitalize="off"
