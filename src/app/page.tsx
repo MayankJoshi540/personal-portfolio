@@ -12,8 +12,12 @@ import {
   LayoutGrid, 
   User, 
   Heart,
-  X
+  X,
+  Layers,
+  ArrowRight
 } from "lucide-react";
+import OpeningPage from "@/components/OpeningPage";
+import Welcome from "@/components/sections/Welcome";
 import About from "@/components/sections/About";
 import Experience from "@/components/sections/Experience";
 import Education from "@/components/sections/Education";
@@ -23,7 +27,7 @@ import Achievements from "@/components/sections/Achievements";
 import Contact from "@/components/sections/Contact";
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState("about");
+  const [activeSection, setActiveSection] = useState("welcome");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentYear, setCurrentYear] = useState(2026);
 
@@ -34,7 +38,6 @@ export default function Home() {
   const [paletteQuery, setPaletteQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [showToast, setShowToast] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Collapsible Bottom Terminal States
@@ -205,12 +208,11 @@ export default function Home() {
           newHistory.push("Error: Please specify a section (about, experience, education, projects, skills, achievements, contact)");
         } else {
           const sect = commandArg.toLowerCase();
-          const el = document.getElementById(sect);
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth" });
-            newHistory.push(`[success] Scrolling to section: ${sect}`);
+          if (sectionsList.some(s => s.id === sect)) {
+            handleSelectSection(sect);
+            newHistory.push(`[success] Scrolled editor file to: ${sect}`);
           } else {
-            newHistory.push(`Error: Section '${commandArg}' not found on page.`);
+            newHistory.push(`Error: Section '${commandArg}' not found.`);
           }
         }
         break;
@@ -234,18 +236,8 @@ export default function Home() {
     }
   }, []);
 
-  // Global mouse position listener for background spotlight animation
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const handleMouse = (e: MouseEvent) => {
-        setMousePos({ x: e.clientX, y: e.clientY });
-      };
-      window.addEventListener("mousemove", handleMouse);
-      return () => window.removeEventListener("mousemove", handleMouse);
-    }
-  }, []);
-
   const sectionsList = [
+    { id: "welcome", file: "welcome.md", label: "welcome.md", icon: "welcome" },
     { id: "about", file: "about.md", label: "about.md", icon: "md" },
     { id: "experience", file: "experience.log", label: "experience.log", icon: "log" },
     { id: "education", file: "education.yml", label: "education.yml", icon: "yml" },
@@ -255,12 +247,18 @@ export default function Home() {
     { id: "contact", file: "contact.sh", label: "contact.sh", icon: "sh" }
   ];
 
-  // Smooth scroll helper
-  const handleScrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      setIsSidebarOpen(false);
+  // Tab switch & scroll helper
+  const handleSelectSection = (id: string) => {
+    setActiveSection(id);
+    setIsSidebarOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      const topOffset = window.innerWidth >= 768 ? 100 : 110;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - topOffset,
+        behavior: "smooth"
+      });
     }
   };
 
@@ -297,13 +295,15 @@ export default function Home() {
   };
 
   const paletteItems = [
-    { type: "file", icon: "md", name: "about.md", action: () => { handleScrollTo("about"); setIsPaletteOpen(false); } },
-    { type: "file", icon: "log", name: "experience.log", action: () => { handleScrollTo("experience"); setIsPaletteOpen(false); } },
-    { type: "file", icon: "yml", name: "education.yml", action: () => { handleScrollTo("education"); setIsPaletteOpen(false); } },
-    { type: "file", icon: "js", name: "projects.js", action: () => { handleScrollTo("projects"); setIsPaletteOpen(false); } },
-    { type: "file", icon: "json", name: "skills.json", action: () => { handleScrollTo("skills"); setIsPaletteOpen(false); } },
-    { type: "file", icon: "txt", name: "achievements.txt", action: () => { handleScrollTo("achievements"); setIsPaletteOpen(false); } },
-    { type: "file", icon: "sh", name: "contact.sh", action: () => { handleScrollTo("contact"); setIsPaletteOpen(false); } },
+    { type: "file", icon: "welcome", name: "welcome.md", action: () => { handleSelectSection("welcome"); setIsPaletteOpen(false); } },
+    { type: "file", icon: "md", name: "about.md", action: () => { handleSelectSection("about"); setIsPaletteOpen(false); } },
+    { type: "file", icon: "log", name: "experience.log", action: () => { handleSelectSection("experience"); setIsPaletteOpen(false); } },
+    { type: "file", icon: "yml", name: "education.yml", action: () => { handleSelectSection("education"); setIsPaletteOpen(false); } },
+    { type: "file", icon: "js", name: "projects.js", action: () => { handleSelectSection("projects"); setIsPaletteOpen(false); } },
+    { type: "file", icon: "json", name: "skills.json", action: () => { handleSelectSection("skills"); setIsPaletteOpen(false); } },
+    { type: "file", icon: "txt", name: "achievements.txt", action: () => { handleSelectSection("achievements"); setIsPaletteOpen(false); } },
+    { type: "file", icon: "sh", name: "contact.sh", action: () => { handleSelectSection("contact"); setIsPaletteOpen(false); } },
+    { type: "command", name: "> Go to welcome.md (Intro Screen)", action: () => { handleSelectSection("welcome"); setIsPaletteOpen(false); } },
     { type: "theme", name: "> Theme: One Dark Pro (Default)", action: () => handleSetTheme("onedark") },
     { type: "theme", name: "> Theme: Dracula", action: () => handleSetTheme("dracula") },
     { type: "theme", name: "> Theme: Monokai", action: () => handleSetTheme("monokai") },
@@ -320,6 +320,13 @@ export default function Home() {
   // Global key bindings
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Launch on Enter/Space if on welcome tab
+      if (activeSection === "welcome" && (e.key === "Enter" || e.key === " ")) {
+        e.preventDefault();
+        handleSelectSection("about");
+        return;
+      }
+
       // Toggle Command Palette (Ctrl+P, Ctrl+K, or F1 - case-insensitive)
       if (
         ((e.ctrlKey || e.metaKey) && (e.key === "p" || e.key === "P" || e.key === "k" || e.key === "K")) ||
@@ -344,7 +351,7 @@ export default function Home() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [activeSection]);
 
   // Auto-focus search input when palette opens
   useEffect(() => {
@@ -372,38 +379,46 @@ export default function Home() {
     }
   };
 
-  // IntersectionObserver scrollspy
+  // IntersectionObserver scrollspy for active section highlighting
   useEffect(() => {
-    const sections = document.querySelectorAll("section[id]");
-    const observerOptions = {
-      root: null,
-      rootMargin: "-25% 0px -55% 0px",
-      threshold: 0
-    };
+    const timer = setTimeout(() => {
+      const sections = document.querySelectorAll("section[id]");
+      const observerOptions = {
+        root: null,
+        rootMargin: "-15% 0px -65% 0px",
+        threshold: 0
+      };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute("id");
-          if (id) {
-            setActiveSection(id);
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            if (id) {
+              setActiveSection(id);
+            }
           }
-        }
-      });
-    }, observerOptions);
+        });
+      }, observerOptions);
 
-    sections.forEach((section) => observer.observe(section));
+      sections.forEach((section) => observer.observe(section));
 
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
+      return () => {
+        sections.forEach((section) => observer.unobserve(section));
+      };
+    }, 150);
+
+    return () => clearTimeout(timer);
   }, []);
-
-
 
   // Custom Inline SVG File Icons for IDE authenticity
   const renderFileIcon = (type: string, size = 14) => {
     switch (type) {
+      case "welcome":
+        return (
+          <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="#a19cff" strokeWidth="2.5" className="flex-shrink-0">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+        );
       case "md":
         return (
           <svg viewBox="0 0 24 24" width={size} height={size} fill="#51a1fc" className="flex-shrink-0">
@@ -453,7 +468,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-editor-bg select-text text-text-mid overflow-x-clip">
+    <div className="min-h-screen w-full bg-editor-bg select-text text-text-mid relative flex flex-col">
       
       {/* Background Grid */}
       <div className="fixed inset-0 pointer-events-none z-[-10] opacity-20" 
@@ -470,12 +485,13 @@ export default function Home() {
             <polygon points="5 3 19 12 5 21 5 3"/>
           </svg>
           <div className="hidden lg:flex gap-4">
+            <button onClick={() => handleSelectSection("welcome")} className="bg-transparent border-none p-0 font-mono text-xs text-text-dim cursor-pointer hover:text-text-high">Welcome</button>
             <span className="cursor-default hover:text-text-high">File</span>
             <span className="cursor-default hover:text-text-high">Edit</span>
             <span className="cursor-default hover:text-text-high">Selection</span>
             <span className="cursor-default hover:text-text-high">View</span>
             <span className="cursor-default hover:text-text-high">Go</span>
-            <span className="cursor-default hover:text-text-high">Terminal</span>
+            <button onClick={() => setIsTerminalOpen(prev => !prev)} className="bg-transparent border-none p-0 font-mono text-xs text-text-dim cursor-pointer hover:text-text-high">Terminal</button>
           </div>
         </div>
         <div className="font-mono text-xs text-text-dim absolute left-1/2 transform -translate-x-1/2 truncate max-w-[35%] lg:max-w-[50%]">
@@ -515,14 +531,14 @@ export default function Home() {
       />
 
       {/* IDE CORE LAYOUT */}
-      <div className="flex flex-1 pt-[48px] md:pt-[35px] min-h-screen">
+      <div className="flex flex-1 pt-[48px] md:pt-[35px] pb-[22px] min-h-screen w-full">
         
         {/* 3. FIXED SIDEBAR (Activity Bar + File Tree Explorer) */}
         <aside 
-          className={`w-[288px] h-[calc(100vh-48px)] md:h-[calc(100vh-35px)] bg-editor-sidebar border-r border-editor-border fixed left-0 top-[48px] md:top-[35px] z-40 flex transition-transform duration-300 ${
-            isSidebarCollapsed ? "md:-translate-x-full" : "md:translate-x-0"
+          className={`w-[288px] sticky top-[35px] h-[calc(100vh-35px-22px)] bg-editor-sidebar border-r border-editor-border flex-shrink-0 z-40 transition-transform duration-300 overflow-y-auto ${
+            isSidebarCollapsed ? "hidden" : "flex"
           } ${
-            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+            isSidebarOpen ? "fixed left-0 top-[48px] bottom-[22px] translate-x-0" : "hidden md:flex"
           }`}
         >
           {/* Activity Bar */}
@@ -531,23 +547,47 @@ export default function Home() {
               <div className="w-full py-1 text-accent-violet border-l-2 border-accent-violet flex justify-center cursor-default">
                 <Folder className="w-5.5 h-5.5" />
               </div>
-              <div className="text-text-dim hover:text-text-high py-1 flex justify-center cursor-default transition-colors">
-                <Search className="w-5.5 h-5.5" />
-              </div>
-              <div className="text-text-dim hover:text-text-high py-1 flex justify-center cursor-default transition-colors">
-                <GitBranch className="w-5.5 h-5.5" />
-              </div>
-              <div className="text-text-dim hover:text-text-high py-1 flex justify-center cursor-default transition-colors">
-                <Play className="w-5.5 h-5.5" />
-              </div>
-              <div className="text-text-dim hover:text-text-high py-1 flex justify-center cursor-default transition-colors">
-                <LayoutGrid className="w-5.5 h-5.5" />
-              </div>
+              <button 
+                onClick={() => {
+                  setIsPaletteOpen(true);
+                  setPaletteQuery("");
+                  setSelectedIndex(0);
+                }}
+                className="text-text-dim hover:text-text-high py-1 flex justify-center cursor-pointer transition-colors w-full bg-transparent border-none"
+                title="Search / Command Palette (Ctrl + P)"
+              >
+                <Search className="w-5.5 h-5.5 mx-auto" />
+              </button>
+              <button 
+                onClick={() => handleSelectSection("experience")}
+                className="text-text-dim hover:text-text-high py-1 flex justify-center cursor-pointer transition-colors w-full bg-transparent border-none"
+                title="Git History (experience.log)"
+              >
+                <GitBranch className="w-5.5 h-5.5 mx-auto" />
+              </button>
+              <button 
+                onClick={() => handleSelectSection("projects")}
+                className="text-text-dim hover:text-text-high py-1 flex justify-center cursor-pointer transition-colors w-full bg-transparent border-none"
+                title="Run Projects (projects.js)"
+              >
+                <Play className="w-5.5 h-5.5 mx-auto" />
+              </button>
+              <button 
+                onClick={() => handleSelectSection("skills")}
+                className="text-text-dim hover:text-text-high py-1 flex justify-center cursor-pointer transition-colors w-full bg-transparent border-none"
+                title="Skills & Technologies (skills.json)"
+              >
+                <LayoutGrid className="w-5.5 h-5.5 mx-auto" />
+              </button>
             </div>
             <div className="flex flex-col items-center gap-5 w-full">
-              <div className="text-text-dim hover:text-text-high py-1 flex justify-center cursor-default transition-colors">
-                <User className="w-5.5 h-5.5" />
-              </div>
+              <button 
+                onClick={() => handleSelectSection("about")}
+                className="text-text-dim hover:text-text-high py-1 flex justify-center cursor-pointer transition-colors w-full bg-transparent border-none"
+                title="Author Profile (about.md)"
+              >
+                <User className="w-5.5 h-5.5 mx-auto" />
+              </button>
               <button 
                 onClick={() => {
                   setIsPaletteOpen(true);
@@ -578,9 +618,9 @@ export default function Home() {
                 {sectionsList.map((sec) => (
                   <li key={sec.id}>
                     <button 
-                      onClick={() => handleScrollTo(sec.id)}
+                      onClick={() => handleSelectSection(sec.id)}
                       className={`w-full flex items-center gap-3 px-6 py-2 text-left font-sans text-sm md:text-[15px] font-bold border-l-2 cursor-pointer transition-all duration-150 ${
-                        activeSection === sec.id 
+                        activeSection === sec.id
                           ? "bg-editor-panel-alt text-text-high border-accent-amber" 
                           : "border-transparent text-text-mid hover:text-text-high hover:bg-editor-panel"
                       }`}
@@ -635,21 +675,17 @@ export default function Home() {
           </div>
         </aside>
 
-        {/* 4. SCROLLABLE EDITOR CONTENT CONTAINER */}
-        <main className={`flex-1 min-w-0 transition-all duration-300 ${
-          isSidebarCollapsed ? "md:ml-0" : "md:ml-[288px]"
-        } ${
-          isTerminalOpen ? "pb-[262px]" : "pb-[22px]"
-        }`}>
+        {/* 4. MAIN EDITOR AREA */}
+        <main className="flex-1 flex flex-col min-w-0 bg-editor-bg pb-16">
           
           {/* STICKY TAB BAR */}
-          <div className="h-[40px] bg-editor-sidebar border-b border-editor-border flex overflow-x-auto scrollbar-none sticky top-[48px] md:top-[35px] z-30 select-none max-w-full">
+          <div className="h-[40px] sticky top-[48px] md:top-[35px] z-30 flex-shrink-0 bg-editor-sidebar border-b border-editor-border flex items-center overflow-x-auto scrollbar-none select-none max-w-full">
             {sectionsList.map((sec) => (
               <button 
                 key={sec.id}
-                onClick={() => handleScrollTo(sec.id)}
+                onClick={() => handleSelectSection(sec.id)}
                 className={`h-full px-4 sm:px-5 flex items-center gap-2 border-r border-editor-border font-sans text-xs sm:text-sm font-bold relative cursor-pointer whitespace-nowrap transition-colors duration-150 flex-shrink-0 ${
-                  activeSection === sec.id 
+                  activeSection === sec.id
                     ? "bg-editor-bg text-text-high font-bold" 
                     : "bg-editor-sidebar text-text-dim hover:bg-editor-panel/50 hover:text-text-mid"
                 }`}
@@ -664,8 +700,8 @@ export default function Home() {
             ))}
           </div>
 
-          {/* BREADCRUMBS PATH */}
-          <div className="h-[24px] bg-editor-bg border-b border-editor-border-soft flex items-center px-4 sm:px-6 font-mono text-[11px] text-text-dim select-none overflow-x-auto scrollbar-none max-w-full">
+          {/* STICKY BREADCRUMBS PATH */}
+          <div className="h-[24px] sticky top-[88px] md:top-[75px] z-20 flex-shrink-0 bg-editor-bg border-b border-editor-border-soft flex items-center justify-between px-4 sm:px-6 font-mono text-[11px] text-text-dim select-none overflow-x-auto scrollbar-none max-w-full">
             <div className="flex items-center gap-1.5 whitespace-nowrap">
               <span>mayank-joshi</span>
               <span className="opacity-50">&gt;</span>
@@ -673,32 +709,44 @@ export default function Home() {
               <span className="opacity-50">&gt;</span>
               <span>sections</span>
               <span className="opacity-50">&gt;</span>
-              <span className="text-text-mid">{sectionsList.find(s => s.id === activeSection)?.file || "about.md"}</span>
+              <span className="text-text-mid">
+                {sectionsList.find(s => s.id === activeSection)?.file || "welcome.md"}
+              </span>
+            </div>
+            <div className="hidden sm:flex items-center gap-3 text-[10px] text-text-dim">
+              <span>VS Code Workspace</span>
+              <span>•</span>
+              <span className="text-accent-teal">Scroll Active</span>
             </div>
           </div>
 
-          {/* EDITOR BODY SECTIONS */}
-          <div className="px-4 sm:px-6 md:px-8 lg:px-12 py-8 max-w-[900px] w-full mx-auto min-w-0">
-            <About />
-            <Experience />
-            <Education />
-            <Projects />
-            <Skills />
-            <Achievements />
-            <Contact />
+          {/* INNER EDITOR CONTENT STREAM */}
+          <div 
+            id="editor-viewport" 
+            className="px-4 sm:px-6 md:px-8 lg:px-12 py-8 max-w-[960px] w-full mx-auto min-w-0"
+          >
+            <div className="space-y-16">
+              <OpeningPage onLaunch={() => handleSelectSection("about")} />
+              <About />
+              <Experience />
+              <Education />
+              <Projects />
+              <Skills />
+              <Achievements />
+              <Contact />
+            </div>
 
-            {/* FOOTER */}
+            {/* FOOTER INSIDE EDITOR VIEW */}
             <footer className="border-t border-editor-border mt-16 pt-8 pb-12 flex justify-center items-center gap-1.5 font-mono text-xs text-text-dim select-none flex-wrap text-center">
-              <span>&copy; {currentYear} Mayank Joshi. Crafted with</span>
+              <span>&copy; {currentYear} Mayank Joshi. Visual Studio Code Portfolio.</span>
               <Heart className="w-3.5 h-3.5 text-accent-coral fill-accent-coral animate-pulse flex-shrink-0" />
-              <span>and VS Code theme.</span>
             </footer>
           </div>
         </main>
       </div>
 
       {/* 5. FIXED STATUS BAR (Bottom) */}
-      <div className="h-[22px] bg-accent-violet fixed bottom-0 left-0 right-0 z-50 flex justify-between items-center px-4 font-mono text-[11px] text-editor-activity font-semibold select-none overflow-hidden">
+      <div className="h-[22px] bg-accent-violet fixed bottom-0 left-0 right-0 z-50 flex justify-between items-center px-4 font-mono text-[11px] text-editor-activity font-semibold select-none overflow-hidden flex-shrink-0">
         <div className="flex items-center gap-3.5 flex-shrink-0">
           <button 
             onClick={() => setIsTerminalOpen(prev => !prev)}
@@ -720,10 +768,17 @@ export default function Home() {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <span className="hidden sm:inline">Ln {activeSection === "about" ? "12" : activeSection === "experience" ? "45" : "78"}, Col 4</span>
+          <button 
+            onClick={() => handleSelectSection("welcome")} 
+            className="hover:text-text-high transition-colors bg-transparent border-none font-mono text-[11px] text-editor-activity font-semibold cursor-pointer hidden sm:inline"
+            title="Scroll to Top / Welcome"
+          >
+            welcome.md
+          </button>
+          <span className="hidden sm:inline">Ln 1, Col 1</span>
           <span>Spaces: 2</span>
           <span>UTF-8</span>
-          <span>HTML5</span>
+          <span className="uppercase">{activeSection.slice(0, 3)}</span>
         </div>
       </div>
 
@@ -781,6 +836,7 @@ export default function Home() {
           </div>
         </div>
       )}
+
       {/* 7. DESKTOP TOAST NOTIFICATION (Ctrl + P Tip) */}
       {showToast && (
         <div className="fixed bottom-10 right-6 bg-editor-panel border border-editor-border rounded-lg shadow-2xl p-5 max-w-sm flex gap-3.5 z-40 animate-[slideIn_0.3s_ease-out] select-none font-mono text-base hidden md:flex">
@@ -834,9 +890,7 @@ export default function Home() {
       {/* 8. COLLAPSIBLE BOTTOM IDE PANEL (Terminal) */}
       {isTerminalOpen && (
         <div 
-          className={`fixed bottom-[28px] left-0 right-0 h-[280px] bg-editor-sidebar border-t border-editor-border z-30 flex flex-col font-mono select-none transition-all duration-300 ${
-            isSidebarCollapsed ? "md:left-0" : "md:left-[288px]"
-          }`}
+          className="fixed bottom-[22px] left-0 md:left-[288px] right-0 h-[280px] bg-editor-sidebar border-t border-editor-border z-30 flex flex-col font-mono select-none transition-all duration-300"
         >
           {/* Top Bar Tabs */}
           <div className="h-9 bg-editor-activity border-b border-editor-border flex items-center justify-between px-4 text-sm">
